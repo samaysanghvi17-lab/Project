@@ -106,22 +106,22 @@ def header(active):
 </div></header>'''
 
 def footer():
-    fit = "".join(f'<li><a href="{fp(s)}">{E(FITTINGS[s]["name"])}</a></li>' for s in FITTINGS_ORDER)
-    fl = "".join(f'<li><a href="{flp(s)}">{E(FLANGES[s]["name"])}</a></li>' for s in FLANGES_ORDER)
     return f'''<footer><div class="wrap">
-  <div class="foot foot5">
+  <div class="foot">
     <div>{LOGO_L}<address><span><strong style="color:#fff">Neo Impex Stainless Pvt. Ltd.</strong></span>
       <span>Works: Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India</span>
       <span>Office: 709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India</span>
-      <span><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><br><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><br><a href="tel:+919372603602">+91 93726 03602</a> · <a href="tel:+912266393943">+91 22 6639 3943</a> / <a href="tel:+912266393944">44</a></span></address></div>
-    <div><h4>Buttweld fittings</h4><ul>{fit}<li><a href="/buttweld-fittings/#materials">By material</a></li></ul></div>
-    <div><h4>Flanges</h4><ul>{fl}<li><a href="/flanges/#materials">By material</a></li></ul></div>
-    <div><h4>Resources</h4><ul><li><a href="/data-sheets/">Data sheets</a></li><li><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a></li><li><a href="/blog/">Blog</a></li><li><a href="/export/usa/">Export to the USA</a></li><li><a href="/export/canada/">Export to Canada</a></li><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/request-a-quote/">Request a quote</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
+      <span><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><br><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><br><a href="tel:+919372603602">+91 93726 03602</a> \u00b7 <a href="tel:+912266393943">+91 22 6639 3943</a> / <a href="tel:+912266393944">44</a></span></address></div>
+    <div><p class="fh">Products</p><ul><li><a href="/buttweld-fittings/">Buttweld fittings</a></li><li><a href="/flanges/">Flanges</a></li><li><a href="/buttweld-fittings/#materials">Fittings by material</a></li><li><a href="/flanges/#materials">Flanges by material</a></li><li><a href="/data-sheets/">Data sheets</a></li></ul></div>
+    <div><p class="fh">Export</p><ul><li><a href="/export/usa/">USA</a></li><li><a href="/export/canada/">Canada</a></li><li><a href="/request-a-quote/">Request a quote</a></li></ul></div>
+    <div><p class="fh">Company</p><ul><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/blog/">Blog</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
   </div>
-  <div class="legal"><span>© 2026 Neo Impex Stainless Pvt. Ltd. · neoimpexglobal.com</span><span>Established 2005 · Vadodara, India</span></div>
+  <div class="legal"><span>\u00a9 2026 Neo Impex Stainless Pvt. Ltd. \u00b7 neoimpexglobal.com</span><span>Established 2005 \u00b7 Vadodara, India</span></div>
 </div></footer>
+<aside class="shortcuts" aria-label="Quick contact">
 <a class="wa-float" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat with Neo Impex on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a>
 <div class="mbar"><a class="mq" href="/request-a-quote/">Request a quote</a><a class="mw" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a></div>
+</aside>
 <script src="/assets/js/config.js"></script><script src="/assets/js/site.js" defer></script>'''
 
 ORG = {"@context": "https://schema.org", "@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd.", "url": SITE + "/",
@@ -174,7 +174,7 @@ def faq_block(faqs, heading="Frequently asked questions"):
 def cta_band(title="Send your BOQ. Get a quote in 24 business hours.", text="Price, lead time and delivery terms for the USA and Canada, with EN 10204 3.1 certificates.", product=""):
     q = "/request-a-quote/" + (f"?product={E(product)}" if product else "")
     return f'''<div class="cta-band reveal"><div><h2>{E(title)}</h2><p>{E(text)}</p></div>
-  <div class="cta"><a class="btn btn-gold" href="{q}">Request a quote</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div></div>'''
+  <div class="cta"><a class="btn btn-gold" href="{q}">Request a quote</a></div></div>'''
 
 def quote_form(uid, product_default="", compact=False, title="Request a quote", hint=None, heading_tag="h3"):
     hint = hint or ("Reply with price and lead time within 24 business hours. Attach your BOQ or drawing if you have one." if not compact else "We reply within 24 business hours.")
@@ -218,7 +218,7 @@ def phero(h1, lede, eyebrow, chips=(), visual="", cta=True, product="", single=F
     ch = f'<div class="chips">{"".join(f"<span>{E(c)}</span>" for c in chips)}</div>' if chips else ""
     c = ""
     if cta:
-        c = f'<div class="cta"><a class="btn btn-gold" href="/request-a-quote/{"?product=" + E(product) if product else ""}">Request a quote</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div>'
+        c = f'<div class="cta"><a class="btn btn-gold" href="/request-a-quote/{"?product=" + E(product) if product else ""}">Request a quote</a></div>'
     vis = f'<div class="pvisual{" art" if "<svg" in visual else ""}">{visual}</div>' if visual else ""
     return f'''<section class="phero{" single" if single or not visual else ""}"><div class="wrap"><div><p class="eyebrow gold">{E(eyebrow)}</p><h1>{E(h1)}</h1><p class="lede">{E(lede)}</p>{ch}{c}</div>{vis}</div></section>'''
 
@@ -251,22 +251,20 @@ def mat_visual(slug, fam):
 def build_home():
     title = "Buttweld Fittings & Flanges Manufacturer | USA, Canada"
     desc = "Neo Impex makes ASME B16.9 buttweld fittings and ASME B16.5/B16.47 flanges in India for US and Canadian buyers. 3.1 certificates, quote in 24 hours."
-    fit_cards = "".join(lcard(fp(s), FITTINGS[s]["name"], FITTINGS[s]["short"], art(FIT_ART[s])) for s in ["elbows", "tees", "reducers", "pipe-bends"])
-    fl_cards = "".join(lcard(flp(s), FLANGES[s]["name"], FLANGES[s]["short"], art(FL_ART[s])) for s in ["weld-neck", "slip-on", "blind", "ring-type-joint"])
     mats = "".join(f'<article class="card reveal"><div class="kind">Material</div><h3>{E(MATERIALS[m]["name"])}</h3><p class="std">{E(MATERIALS[m]["short"])}</p><p class="std"><a href="{fmat(m)}">Buttweld fittings</a> · <a href="{flmat(m)}">Flanges</a></p></article>' for m in MATERIALS_ORDER)
     posts = "".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG[-3:][::-1])
     body = f'''<main id="main">
 <div class="hero" id="top">
   <aside class="hero-panel" aria-label="Contact details"><div class="blk"><div><b>Contacts</b><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><a href="tel:+919372603602">+91 93726 03602</a></div><div><b>Works</b>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, India</div></div><div><b>Ships to</b>USA · Canada</div></aside>
-  <div class="hero-main"><p class="topline">Established 2005 · ISO 9001:2015 · PED 2014/68/EU · IBR workshop approval</p>
+  <div class="hero-main"><p class="topline">Established 2005 · ISO 9001:2015 certified</p>
     <h1><span>Buttweld fittings</span><span class="ln">&amp; flanges,</span><span class="ln">made to ship.</span></h1>
     <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India, with EN 10204 3.1 certificates.</p>
-    <div class="cta"><a class="btn btn-gold" href="/request-a-quote/">Get a quote in 24 hours</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div></div>
+    <div class="cta"><a class="btn btn-gold" href="/request-a-quote/">Get a quote in 24 hours</a></div></div>
 </div>
 <section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Product range</p><h2>Our range ↳ in motion</h2></div></div>
   <div class="orbit" role="region" aria-roledescription="carousel" aria-label="Neo Impex product range">
     <div class="orbit-stage" id="stage"><div class="orbit-ring" aria-hidden="true"><svg viewBox="0 0 1000 230" preserveAspectRatio="none"><ellipse cx="500" cy="115" rx="498" ry="113" fill="none" stroke="#f1dec0" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/></svg></div>
-      <div class="orbit-glow" aria-hidden="true"></div><img class="orbit-mark" src="/assets/img/mark-white.png" alt="" aria-hidden="true"></div>
+      <div class="orbit-glow" aria-hidden="true"></div><img class="orbit-mark" src="/assets/img/mark-white.png" alt="" aria-hidden="true" width="220" height="168"></div>
     <div class="orbit-caption" id="caption" aria-live="off"><span class="tag" id="capTag">Flanges</span><h2 id="capTitle">Weld neck flanges</h2><p id="capText">WNRF and RTJ for high-pressure and critical service.</p>
       <a class="more" id="capLink" href="/flanges/weld-neck/">View product →</a><a class="more" id="capQuote" href="/request-a-quote/">Request a quote →</a></div>
     <div class="orbit-controls"><button class="arrow" id="prev" aria-label="Previous product">←</button><div class="dots" id="dots"></div><button class="arrow" id="next" aria-label="Next product">→</button></div>
@@ -284,18 +282,7 @@ def build_home():
    <article class="family reveal"><div class="photo"><img src="/assets/img/flange-range.jpg" alt="Black forged flanges in four sizes" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">½″ to 60″ · Class 150–2500</span><h3>Forged flanges</h3><p>Weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ and long weld neck – ASME B16.5 and B16.47.</p><a class="btn btn-blue" href="/flanges/">Explore flanges</a></div></article>
   </div></div></section>
 
-<section class="content alt"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Popular products</p><h2>Start with the most requested.</h2></div><div class="lcards reveal">{fit_cards}</div><div class="lcards reveal" style="margin-top:16px">{fl_cards}</div></div></section>
-
 <section class="tint" id="materials"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Materials</p><h2>Every grade in your piping class.</h2><p>Stainless, duplex, super duplex, carbon, low-temperature, chrome-moly and nickel alloys, for both fittings and flanges.</p></div><div class="grid4">{mats}</div></div></section>
-
-<section><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Why Neo Impex</p><h2>Buy direct from the manufacturer.</h2></div>
-  <div class="why reveal">
-   <div><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l6 3V10l6 3V6h3v15z"/><path d="M3 21h18"/></svg></span><h3>Made in our own works</h3><p>Forging, forming, bending, machining and testing at Vadodara – not a trader.</p></div>
-   <div><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><h3>Documents done right</h3><p>Heat-traceable EN 10204 3.1 certificates, MSS SP-25 marking, NACE reports and shipping papers.</p></div>
-   <div><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></span><h3>One roof</h3><p>Fittings, bends, flanges and forged fittings from one supplier and one set of documents.</p></div>
-   <div><span class="wi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>A real quote in 24 hours</h3><p>Send your BOQ and get line-by-line prices and lead time.</p></div>
-  </div>
-</div></section>
 
 <section class="fullbleed" aria-label="Made in our own works"><img src="/assets/img/factory-tees-stock.jpg" alt="Carbon steel buttweld tees and elbows stacked at our works in Vadodara" loading="lazy" width="1280" height="960"><div class="wrap"><p class="eyebrow">Vadodara, India</p><h2><span>Made</span><span class="ln">in our</span><span class="ln">own works</span></h2><p class="lede">Forging, forming, bending, machining and testing at Vadodara. Buy from the manufacturer, not a trader.</p><div class="cta"><a class="btn btn-gold" href="/buttweld-fittings/">Buttweld fittings</a><a class="btn btn-ghost" href="/flanges/">Flanges</a></div></div><span class="cap">Stock at our works, Vadodara</span></section>
 
@@ -303,15 +290,12 @@ def build_home():
   <div class="export-grid"><article class="region reveal"><h3>United States</h3><p>Buttweld fittings and flanges for distributors and fabricators – inch sizes, MSS SP-25 marking, MTRs, DAP delivery.</p><div class="ports">{"".join(f"<span>{E(p)}</span>" for p in EXPORT["usa"]["ports"])}</div><p style="margin-top:18px"><a class="btn btn-gold" href="/export/usa/">Supplying the USA</a></p></article>
   <article class="region reveal"><h3>Canada</h3><p>Fittings and flanges for distributors, fabricators and contractors, including impact-tested material for cold-climate service.</p><div class="ports">{"".join(f"<span>{E(p)}</span>" for p in EXPORT["canada"]["ports"])}</div><p style="margin-top:18px"><a class="btn btn-gold" href="/export/canada/">Supplying Canada</a></p></article></div></div></section>
 
-<section class="content alt"><div class="wrap"><div class="two"><div class="reveal"><h2 class="h2">Data sheets and free charts</h2><p class="prose">Download or print our data sheets for buttweld fittings and flanges, and use the free pipe schedule chart with 90° elbow dimensions.</p><p style="margin-top:20px"><a class="btn btn-blue" href="/data-sheets/">View data sheets</a></p></div>
-  <div class="panel reveal"><h3>Latest from the blog</h3><ul>{"".join(f'<li><a href="/blog/{b["slug"]}/">{E(b["title"])}</a></li>' for b in BLOG[-4:][::-1])}</ul></div></div></div></section>
-
 <section class="sand" id="process"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">How it works</p><h2>From enquiry to your port in four steps.</h2></div>
   <div class="steps reveal"><div class="step"><b>01</b><h3>Send your BOQ</h3><p>By form, email or WhatsApp.</p></div><div class="step"><b>02</b><h3>Get our quote</h3><p>Price, lead time and terms in 24 business hours.</p></div><div class="step"><b>03</b><h3>Production &amp; inspection</h3><p>Made, tested, inspected; documents shared before dispatch.</p></div><div class="step"><b>04</b><h3>Packed &amp; shipped</h3><p>FOB, CIF or DAP to your port or door.</p></div></div></div></section>
 
 <section class="content"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">From the blog</p><h2>Guides for buyers.</h2></div><div class="bcards reveal">{posts}</div></div></section>
 
-<section class="fullbleed" aria-label="Partner with us"><img src="/assets/img/flanges-packed-blue.jpg" alt="Forged weld neck flanges packed with blue protective covers" loading="lazy" width="1280" height="961"><div class="wrap"><p class="eyebrow">Request a quote</p><h2><span>Partner</span><span class="ln">with us</span></h2><p class="lede">Send your BOQ and get price, lead time and delivery terms for the USA and Canada within 24 business hours.</p><div class="cta"><a class="btn btn-gold" href="#quote">Send your BOQ</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div></div><span class="cap">Forged weld neck flanges, packed for export</span></section>
+<section class="fullbleed slim" aria-label="Partner with us"><img src="/assets/img/flanges-packed-blue.jpg" alt="Forged weld neck flanges packed with blue protective covers" loading="lazy" width="1280" height="961"><div class="wrap"><h2><span>Partner</span><span class="ln">with us</span></h2></div><span class="cap">Forged weld neck flanges, packed for export</span></section>
 
 <section class="on-dark" id="quote"><div class="wrap quote"><div class="reveal"><p class="eyebrow">Request a quote</p><h2>Have a BOQ ready?</h2><p class="sub">Send it now. Price, lead time and delivery terms within 24 business hours.</p>
   <ul class="checks"><li>ISO 9001:2015 certified · PED 2014/68/EU material manufacturer approval · IBR workshop approval</li><li>EN 10204 3.1 certificates with every order</li><li>Shipping to the USA and Canada</li></ul>
@@ -392,8 +376,7 @@ def build_products():
                            "url": SITE + url, "category": hubname}
             body = f'''{cr}<main id="main">{phero(p["h1"], p["short"] + ". Manufactured in India and exported to the USA and Canada with EN 10204 3.1 certificates.", hubname, p["chips"], vis, product=p["name"])}
 <section class="content"><div class="wrap two"><div class="prose reveal"><h2>Overview</h2>{intro}<h2>Features</h2><ul>{feats}</ul><h2>Typical applications</h2><ul>{apps}</ul></div>
- <aside class="side"><div class="panel blue"><h3>Request a quote</h3><p>Send size, schedule or class, material and quantity. Reply within 24 business hours.</p><a class="btn btn-gold" href="/request-a-quote/?product={E(p["name"])}">Request a quote</a></div>
-  <div class="panel"><h3>Available materials</h3><ul>{mlinks}</ul></div></aside></div></section>
+ <aside class="side"><div class="panel"><h3>Available materials</h3><ul>{mlinks}</ul></div></aside></div></section>
 <section class="content alt"><div class="wrap"><h2 class="h2">Specification</h2>{spec_table(p["spec"])}<p class="note">Reference information. Final dimensions and tolerances follow the applicable standard and your purchase order. <a href="/data-sheets/{"buttweld-fittings" if fam == "fit" else "flanges"}/">See the data sheet</a>.</p></div></section>
 <section class="content"><div class="wrap">{fq}</div></section>
 <section class="content alt"><div class="wrap"><div class="two"><div>{quote_form("q-" + slug, hubname, compact=True, title="Quote for " + p["name"].lower())}</div><div><h2 class="h2">Related products</h2><div class="lcards" style="grid-template-columns:repeat(1,1fr)">{related_cards(p["related"][:2], fam)}</div></div></div></div></section></main>'''
@@ -418,7 +401,7 @@ def build_materials():
             props = ""
             if m["props"]:
                 pr = "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td>{E(c)}</td></tr>" for a, b, c in m["props"])
-                props = f'<h2 class="h2" style="margin-top:36px">Minimum strength (ASTM specification)</h2><div class="tblwrap"><table class="dtable text"><thead><tr><th>Grade</th><th>Tensile strength</th><th>Yield strength</th></tr></thead><tbody>{pr}</tbody></table></div><p class="note">Minimum values from the ASTM specification, for reference. Actual values are on your EN 10204 3.1 certificate.</p>'
+                props = f'<h2 class="h2" style="margin-top:36px">Minimum strength (ASTM specification)</h2><div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable text"><thead><tr><th>Grade</th><th>Tensile strength</th><th>Yield strength</th></tr></thead><tbody>{pr}</tbody></table></div><p class="note">Minimum values from the ASTM specification, for reference. Actual values are on your EN 10204 3.1 certificate.</p>'
             uses = "".join(f"<li>{E(u)}</li>" for u in m["uses"])
             if fam == "fit":
                 forms = "".join(f'<li><a href="{fp(s)}">{E(FITTINGS[s]["name"])}</a></li>' for s in FITTINGS_ORDER)
@@ -430,8 +413,8 @@ def build_materials():
             cross = (f'<a href="{flmat(slug)}">{nm.split(" (")[0]} flanges</a>' if fam == "fit" else f'<a href="{fmat(slug)}">{nm.split(" (")[0]} buttweld fittings</a>')
             body = f'''{cr}<main id="main">{phero(f"{nm.split(' (')[0]} {noun.title()}", m["short"] + ". " + ("Buttweld fittings" if fam == "fit" else "Forged flanges") + " exported from India to the USA and Canada.", f"{hubname} · material", [nm], mat_visual(slug, fam), product=f"{nm.split(' (')[0]} {noun}")}
 <section class="content"><div class="wrap two"><div class="prose reveal"><h2>About {E(nm)}</h2><p>{E(m["blurb"])}</p><h2>{E(nm.split(" (")[0])} {noun}</h2><p>{E(text)}</p><h2>Typical uses</h2><ul>{uses}</ul><h2>Limits and selection notes</h2><p>{E(m["limits"])}</p><p>Also see {cross}.</p></div>
- <aside class="side"><div class="panel blue"><h3>Request a quote</h3><p>State grade, size, schedule or class and quantity. Reply within 24 business hours.</p><a class="btn btn-gold" href="/request-a-quote/?product={E(nm.split(" (")[0])}%20{noun}">Request a quote</a></div><div class="panel"><h3>{forms_title}</h3><ul>{forms}</ul></div><div class="panel"><h3>Other materials</h3><ul>{others}</ul></div></aside></div></section>
-<section class="content alt"><div class="wrap"><h2 class="h2">Grades and specifications</h2><div class="tblwrap"><table class="dtable text"><thead><tr><th>Grade</th><th>ASTM specification</th><th>UNS</th></tr></thead><tbody>{rows}</tbody></table></div>{props}</div></section>
+ <aside class="side"><div class="panel"><h3>{forms_title}</h3><ul>{forms}</ul></div><div class="panel"><h3>Other materials</h3><ul>{others}</ul></div></aside></div></section>
+<section class="content alt"><div class="wrap"><h2 class="h2">Grades and specifications</h2><div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable text"><thead><tr><th>Grade</th><th>ASTM specification</th><th>UNS</th></tr></thead><tbody>{rows}</tbody></table></div>{props}</div></section>
 <section class="content"><div class="wrap">{fq}</div></section>
 <section class="content alt"><div class="wrap">{cta_band(product=f"{nm.split(' (')[0]} {noun}")}</div></section></main>'''
             if fam == "fit":
@@ -454,12 +437,12 @@ def build_datasheets():
     title = "Data Sheets and Charts | Buttweld Fittings, Flanges"
     desc = "Data sheets for Neo Impex buttweld fittings and flanges, plus a free pipe schedule chart. Print or save as PDF, or request a signed copy."
     body = f'''{cr}<main id="main">{phero("Data Sheets and Free Charts", "Specification sheets for buttweld fittings and flanges, and a pipe schedule chart with 90° elbow dimensions. Print them or save as PDF.", "Resources", cta=False, single=True)}
-<section class="content"><div class="wrap"><div class="lcards three">{cards}</div><p class="note" style="margin-top:24px">Need a signed data sheet, sample material test certificate or full dimension chart? <a href="/request-a-quote/?product=Data%20sheet">Send us a request</a> and we reply within 24 business hours.</p></div></section></main>'''
+<section class="content"><div class="wrap"><h2 class="sr-only">Available data sheets</h2><div class="lcards three">{cards}</div><p class="note" style="margin-top:24px">Need a signed data sheet, sample material test certificate or full dimension chart? <a href="/request-a-quote/?product=Data%20sheet">Send us a request</a> and we reply within 24 business hours.</p></div></section></main>'''
     page("/data-sheets/", title, desc, body, "ds", [cs], kw=("buttweld fittings and flanges data sheets", ["ASME B16.9 specification", "pipe schedule chart"]))
 
     mat_rows_fit = "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td>{E(c)}</td></tr>" for m in MATERIALS_ORDER for a, b, c in MATERIALS[m]["fit_spec"])
     mat_rows_fl = "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td>{E(c)}</td></tr>" for m in MATERIALS_ORDER for a, b, c in MATERIALS[m]["fl_spec"])
-    mt = lambda rows: f'<div class="tblwrap"><table class="dtable text"><thead><tr><th>Grade</th><th>ASTM specification</th><th>UNS</th></tr></thead><tbody>{rows}</tbody></table></div>'
+    mt = lambda rows: f'<div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable text"><thead><tr><th>Grade</th><th>ASTM specification</th><th>UNS</th></tr></thead><tbody>{rows}</tbody></table></div>'
 
     # fittings data sheet
     d = DATASHEETS["buttweld-fittings"]; url = "/data-sheets/buttweld-fittings/"
@@ -472,7 +455,7 @@ def build_datasheets():
 <h2 class="h2" style="margin-top:36px">4. Manufacturing and testing</h2>{spec_table([("Seamless fittings", "Hot-formed from seamless pipe"), ("Welded fittings", "Fabricated from plate; 100% radiography on welded seams"), ("Heat treatment", "As required by the material, for example solution annealing for austenitic stainless steels"), ("Additional tests", "Such as PMI, hydrostatic or impact tests, can be specified in the purchase order")])}
 <h2 class="h2" style="margin-top:36px">5. Documents and delivery</h2>{spec_table([("Certificates", "EN 10204 3.1 mill test certificate with heat numbers"), ("Inspection", "Third-party inspection can be arranged on request"), ("Shipping documents", "Commercial invoice, packing list, bill of lading, certificate of origin"), ("Terms", "FOB, CIF or DAP")])}
 <h2 class="h2" style="margin-top:36px">6. 90° elbow center-to-end dimensions</h2>
-<div class="tblwrap"><table class="dtable"><thead><tr><th>NPS</th><th>Long radius (in)</th><th>Long radius (mm)</th><th>Short radius (in)</th><th>Short radius (mm)</th></tr></thead><tbody>{"".join(f"<tr><td>{n}</td><td>{lr_in:.2f}</td><td>{lr_mm}</td><td>{nps:.2f}</td><td>{sr_mm}</td></tr>" for n, nps, lr_mm, sr_mm in ELBOW_SIZES for lr_in in [nps * 1.5])}</tbody></table></div>
+<div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable"><thead><tr><th>NPS</th><th>Long radius (in)</th><th>Long radius (mm)</th><th>Short radius (in)</th><th>Short radius (mm)</th></tr></thead><tbody>{"".join(f"<tr><td>{n}</td><td>{lr_in:.2f}</td><td>{lr_mm}</td><td>{nps:.2f}</td><td>{sr_mm}</td></tr>" for n, nps, lr_mm, sr_mm in ELBOW_SIZES for lr_in in [nps * 1.5])}</tbody></table></div>
 <p class="note">Long radius = 1.5 × NPS (ASME B16.9); short radius = 1.0 × NPS (ASME B16.28), NPS 1 and larger. {E(DS_NOTE)}</p>
 <div style="margin-top:40px">{quote_form("ds-fit", "Data sheet / catalogue", compact=True, title="Request a signed data sheet or sample certificate")}</div></div></section></main>'''
     page(url, d["title"], d["desc"], body, "ds", [cs], kw=d["kw"])
@@ -484,7 +467,7 @@ def build_datasheets():
     body = f'''{cr}<main id="main">{ds_hero(d, "Standards, types, sizes, classes, facings, materials, marking and documents for Neo Impex forged flanges.")}
 <section class="content"><div class="wrap prose-wide">{ds_toolbar()}
 <h2 class="h2">1. Scope and standards</h2>{spec_table([("Standards", "ASME B16.5 (NPS ½–24) · ASME B16.47 Series A and B (NPS 26–60) · EN 1092-1 · BS 4504 · BS 10 · DIN"), ("Sizes", "½″ to 60″"), ("Pressure class", "Class 150 to 2500 (size dependent) · PN6 to PN100"), ("Facings", "Raised face, ring type joint, flat face, tongue and groove, male and female"), ("Marking", "Manufacturer, material, class, standard, size, heat number")])}
-<h2 class="h2" style="margin-top:36px">2. Flange types</h2><div class="tblwrap"><table class="dtable text"><thead><tr><th>Type</th><th>Use</th></tr></thead><tbody>{types}</tbody></table></div>
+<h2 class="h2" style="margin-top:36px">2. Flange types</h2><div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable text"><thead><tr><th>Type</th><th>Use</th></tr></thead><tbody>{types}</tbody></table></div>
 <h2 class="h2" style="margin-top:36px">3. Materials</h2>{mt(mat_rows_fl)}
 <h2 class="h2" style="margin-top:36px">4. Manufacturing and testing</h2>{spec_table([("Manufacture", "Forged, heat treated as required, machined and drilled at our works"), ("Traceability", "Heat number marked on every flange"), ("Additional tests", "Such as PMI, hardness, impact or NACE MR0175 / ISO 15156 requirements, can be specified in the purchase order")])}
 <h2 class="h2" style="margin-top:36px">5. Documents and delivery</h2>{spec_table([("Certificates", "EN 10204 3.1 mill test certificate with heat numbers"), ("Inspection", "Third-party inspection can be arranged on request"), ("Shipping documents", "Commercial invoice, packing list, bill of lading, certificate of origin"), ("Terms", "FOB, CIF or DAP")])}
@@ -499,10 +482,10 @@ def build_datasheets():
     body = f'''{cr}<main id="main">{ds_hero(d, "Outside diameter and wall thickness for common pipe sizes, plus 90° elbow center-to-end dimensions.")}
 <section class="content"><div class="wrap prose-wide">{ds_toolbar()}
 <h2 class="h2">Pipe dimensions: Sch 40 and Sch 80</h2>
-<div class="tblwrap"><table class="dtable"><thead><tr><th>NPS (in)</th><th>DN</th><th>OD (in)</th><th>OD (mm)</th><th>Sch 40 wall (in)</th><th>Sch 40 wall (mm)</th><th>Sch 80 wall (in)</th><th>Sch 80 wall (mm)</th></tr></thead><tbody>{rows}</tbody></table></div>
+<div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable"><thead><tr><th>NPS (in)</th><th>DN</th><th>OD (in)</th><th>OD (mm)</th><th>Sch 40 wall (in)</th><th>Sch 40 wall (mm)</th><th>Sch 80 wall (in)</th><th>Sch 80 wall (mm)</th></tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">Wall thicknesses for Sch 40 and Sch 80 from ASME B36.10M. Standard (STD) and extra strong (XS) walls equal Sch 40 and Sch 80 up to NPS 10 and differ above that. Stainless steel pipe (Sch 5S, 10S, 40S, 80S) is covered by ASME B36.19M. {E(DS_NOTE)}</p>
 <h2 class="h2" style="margin-top:40px">90° elbow center-to-end dimensions</h2>
-<div class="tblwrap"><table class="dtable"><thead><tr><th>NPS</th><th>Long radius (in)</th><th>Long radius (mm)</th><th>Short radius (in)</th><th>Short radius (mm)</th></tr></thead><tbody>{"".join(f"<tr><td>{n}</td><td>{nps * 1.5:.2f}</td><td>{lr_mm}</td><td>{nps:.2f}</td><td>{sr_mm}</td></tr>" for n, nps, lr_mm, sr_mm in ELBOW_SIZES)}</tbody></table></div>
+<div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable"><thead><tr><th>NPS</th><th>Long radius (in)</th><th>Long radius (mm)</th><th>Short radius (in)</th><th>Short radius (mm)</th></tr></thead><tbody>{"".join(f"<tr><td>{n}</td><td>{nps * 1.5:.2f}</td><td>{lr_mm}</td><td>{nps:.2f}</td><td>{sr_mm}</td></tr>" for n, nps, lr_mm, sr_mm in ELBOW_SIZES)}</tbody></table></div>
 <p class="note">Long radius = 1.5 × NPS (ASME B16.9); short radius = 1.0 × NPS (ASME B16.28), NPS 1 and larger.</p>
 <div style="margin-top:40px">{cta_band("Need a size that is not here?", "Send your list and we quote any size, schedule and class.")}</div></div></section></main>'''
     page(url, d["title"], d["desc"], body, "ds", [cs], kw=d["kw"])
@@ -512,7 +495,7 @@ def build_export():
     cr, cs = crumbs([("Home", "/"), ("Export", None)])
     cards = "".join(f'<a class="lcard" href="/export/{k}/"><h3>{E(v["h1"])}</h3><p>{E(v["lead"])}</p><span class="go">View</span></a>' for k, v in EXPORT.items())
     body = f'''{cr}<main id="main">{phero(EXPORT_HUB["h1"], "Neo Impex makes ASME buttweld fittings and flanges in India and ships them to the USA and Canada with heat-traceable certificates, marking and your choice of FOB, CIF or DAP terms.", "Export", cta=True, single=True)}
-<section class="content"><div class="wrap"><div class="lcards three" style="grid-template-columns:repeat(2,1fr)">{cards}</div><p class="note" style="margin-top:24px">Shipping to another country? <a href="/request-a-quote/">Send us your enquiry</a>.</p></div></section>
+<section class="content"><div class="wrap"><h2 class="sr-only">Export markets</h2><div class="lcards three" style="grid-template-columns:repeat(2,1fr)">{cards}</div><p class="note" style="margin-top:24px">Shipping to another country? <a href="/request-a-quote/">Send us your enquiry</a>.</p></div></section>
 <section class="content alt"><div class="wrap"><h2 class="h2">Guides for importers</h2><div class="bcards">{"".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG if "import" in b["slug"] or "incoterms" in b["slug"])}</div></div></section></main>'''
     page("/export/", EXPORT_HUB["title"], EXPORT_HUB["desc"], body, "exp", [cs], kw=("buttweld fittings and flanges export", ["export pipe fittings India", "flanges exporter India USA Canada"]))
     for k, v in EXPORT.items():
@@ -535,7 +518,7 @@ def build_blog():
     title = "Blog | Buttweld Fittings and Flanges Buyer Guides"
     desc = "Buyer guides on buttweld fittings and flanges: seamless vs welded, 316 vs 316L, ASME B16.9 vs MSS SP-43, flange markings and importing from India."
     body = f'''{cr}<main id="main">{phero("Buyer Guides and Technical Notes", "Plain-language guides on buttweld fittings, flanges, materials and importing from India to the USA and Canada.", "Blog", cta=False, single=True)}
-<section class="content"><div class="wrap"><div class="bcards">{cards}</div></div></section></main>'''
+<section class="content"><div class="wrap"><h2 class="sr-only">All posts</h2><div class="bcards">{cards}</div></div></section></main>'''
     page("/blog/", title, desc, body, "blog", [cs], kw=("buttweld fittings blog", ["flanges buyer guide", "import pipe fittings from India guide"]))
     for b in BLOG:
         url = f"/blog/{b['slug']}/"
@@ -589,7 +572,7 @@ def certs_cards():
         out += f'<a class="lcard ccard" href="/certifications/#{c["key"]}">{cert_thumb(c)}<span class="kind">{E(c["kind"])}</span><h3>{E(c["short"])}</h3><p>{E(c["card_line"])}</p><span class="go">Details</span></a>'
     return f'<div class="lcards keep1">{out}</div>'
 
-COVER = """<div class="tblwrap"><table class="dtable text"><thead><tr><th>Product</th><th>ISO 9001:2015</th><th>PED material manufacturer</th><th>IBR workshop approval</th></tr></thead><tbody>
+COVER = """<div class="tblwrap" tabindex="0" role="group" aria-label="Data table, scrollable"><table class="dtable text"><thead><tr><th>Product</th><th>ISO 9001:2015</th><th>PED material manufacturer</th><th>IBR workshop approval</th></tr></thead><tbody>
 <tr><td>Buttweld pipe fittings up to 24″</td><td>In scope</td><td>In scope</td><td>In scope (seamless / ERW, up to 30 mm thickness)</td></tr>
 <tr><td>Welded buttweld fittings above 24″</td><td>In scope</td><td>In scope</td><td>Not listed in scope</td></tr>
 <tr><td>Forged flanges</td><td>In scope</td><td>In scope</td><td>Not listed in scope</td></tr>
