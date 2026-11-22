@@ -30,6 +30,13 @@
     });
   }
 
+  /* ---------- mobile submenus ---------- */
+  [].forEach.call(document.querySelectorAll('.subtoggle'), function (t) {
+    t.addEventListener('click', function () {
+      var li = t.parentNode, o = li.classList.toggle('open'); t.setAttribute('aria-expanded', o);
+    });
+  });
+
   /* ---------- reveal on scroll ---------- */
   var rv = [].slice.call(document.querySelectorAll('.reveal'));
   if ('IntersectionObserver' in window && !reduce) {

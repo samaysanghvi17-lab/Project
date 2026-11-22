@@ -89,11 +89,11 @@ def nav_html(active):
     fit = "".join(f'<a href="{fp(s)}">{E(FITTINGS[s]["name"])}</a>' for s in FITTINGS_ORDER)
     fl = "".join(f'<a href="{flp(s)}">{E(FLANGES[s]["name"])}</a>' for s in FLANGES_ORDER)
     return f'''<nav class="main" id="nav" aria-label="Primary">
-      <div class="has-sub">{a("/buttweld-fittings/", "Buttweld Fittings", "fit")}<div class="sub"><span class="grp">Types</span>{fit}<hr><a href="/buttweld-fittings/#materials">By material →</a></div></div>
-      <div class="has-sub">{a("/flanges/", "Flanges", "fl")}<div class="sub"><span class="grp">Types</span>{fl}<hr><a href="/flanges/#materials">By material →</a></div></div>
-      <div class="has-sub">{a("/export/", "Export", "exp")}<div class="sub"><a href="/export/usa/">USA</a><a href="/export/canada/">Canada</a></div></div>
-      <div class="has-sub">{a("/data-sheets/", "Resources", "res")}<div class="sub"><a href="/data-sheets/">Data sheets</a><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a><a href="/blog/">Blog</a></div></div>
-      <div class="has-sub">{a("/about/", "Company", "co")}<div class="sub"><a href="/about/">About us</a><a href="/certifications/">Certifications</a><a href="/request-a-quote/">Contact</a></div></div>
+      <div class="has-sub">{a("/buttweld-fittings/", "Buttweld Fittings", "fit")}<button class="subtoggle" type="button" aria-label="Show Buttweld fittings menu" aria-expanded="false"></button><div class="sub"><span class="grp">Types</span>{fit}<hr><a href="/buttweld-fittings/#materials">By material →</a></div></div>
+      <div class="has-sub">{a("/flanges/", "Flanges", "fl")}<button class="subtoggle" type="button" aria-label="Show Flanges menu" aria-expanded="false"></button><div class="sub"><span class="grp">Types</span>{fl}<hr><a href="/flanges/#materials">By material →</a></div></div>
+      <div class="has-sub">{a("/export/", "Export", "exp")}<button class="subtoggle" type="button" aria-label="Show Export menu" aria-expanded="false"></button><div class="sub"><a href="/export/usa/">USA</a><a href="/export/canada/">Canada</a></div></div>
+      <div class="has-sub">{a("/data-sheets/", "Resources", "res")}<button class="subtoggle" type="button" aria-label="Show Resources menu" aria-expanded="false"></button><div class="sub"><a href="/data-sheets/">Data sheets</a><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a><a href="/blog/">Blog</a></div></div>
+      <div class="has-sub">{a("/about/", "Company", "co")}<button class="subtoggle" type="button" aria-label="Show Company menu" aria-expanded="false"></button><div class="sub"><a href="/about/">About us</a><a href="/certifications/">Certifications</a><a href="/request-a-quote/">Contact</a></div></div>
     </nav>'''
 
 def header(active):
@@ -121,6 +121,7 @@ def footer():
   <div class="legal"><span>© 2026 Neo Impex Stainless Pvt. Ltd. · neoimpexglobal.com</span><span>Established 2005 · Vadodara, India</span></div>
 </div></footer>
 <a class="wa-float" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat with Neo Impex on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a>
+<div class="mbar"><a class="mq" href="/request-a-quote/">Request a quote</a><a class="mw" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a></div>
 <script src="/assets/js/config.js"></script><script src="/assets/js/site.js" defer></script>'''
 
 ORG = {"@context": "https://schema.org", "@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd.", "url": SITE + "/",
@@ -586,7 +587,7 @@ def certs_cards():
     out = ""
     for c in CERTS:
         out += f'<a class="lcard ccard" href="/certifications/#{c["key"]}">{cert_thumb(c)}<span class="kind">{E(c["kind"])}</span><h3>{E(c["short"])}</h3><p>{E(c["card_line"])}</p><span class="go">Details</span></a>'
-    return f'<div class="lcards">{out}</div>'
+    return f'<div class="lcards keep1">{out}</div>'
 
 COVER = """<div class="tblwrap"><table class="dtable text"><thead><tr><th>Product</th><th>ISO 9001:2015</th><th>PED material manufacturer</th><th>IBR workshop approval</th></tr></thead><tbody>
 <tr><td>Buttweld pipe fittings up to 24″</td><td>In scope</td><td>In scope</td><td>In scope (seamless / ERW, up to 30 mm thickness)</td></tr>
