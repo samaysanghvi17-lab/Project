@@ -33,7 +33,7 @@ def check(url, title, desc):
     if len(title) > 68: WARN.append(f"title {len(title)} chars: {url}")
     if not (70 <= len(desc) <= 165): WARN.append(f"description {len(desc)} chars: {url}")
 
-LOGO = '<img src="/assets/img/logo.png" alt="Neo Impex – Connecting Pipeline" width="155" height="46">'
+LOGO = '<img src="/assets/img/logo-light.png" alt="Neo Impex \u2013 Connecting Pipeline" width="128" height="38">'
 LOGO_L = '<img src="/assets/img/logo-light.png" alt="Neo Impex – Connecting Pipeline" width="196" height="58" loading="lazy">'
 
 def fp(slug): return f"/buttweld-fittings/{slug}/"
@@ -42,7 +42,7 @@ def fmat(slug): return f"/buttweld-fittings/materials/{slug}/"
 def flmat(slug): return f"/flanges/materials/{slug}/"
 
 # ----------------------------------------------------------------- schematic drawings
-OUT, FILL = "#062d7a", "#e5ebfa"
+OUT, FILL = "#0a0b0e", "#e4e5e8"
 def tube(d, w=34):
     return (f'<path d="{d}" fill="none" stroke="{OUT}" stroke-width="{w + 5}" stroke-linejoin="round"/>'
             f'<path d="{d}" fill="none" stroke="{FILL}" stroke-width="{w}" stroke-linejoin="round"/>')
@@ -96,7 +96,6 @@ def nav_html(active):
 
 def header(active):
     return f'''<a class="skip" href="#main">Skip to content</a>
-<div class="topbar"><div class="wrap"><span class="left">Manufacturer &amp; exporter since 2005 · ISO 9001:2015 · PED · IBR</span><span class="right"><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></span></div></div>
 <header class="site"><div class="wrap">
     <a class="brand" href="/" aria-label="Neo Impex – home">{LOGO}</a>
     {nav_html(active)}
@@ -138,7 +137,7 @@ def head(title, desc, url, schemas=(), image=OG, noindex=False, extra_css=""):
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
 <meta name="robots" content="{robots}">
-<meta name="theme-color" content="#0b3c9c">
+<meta name="theme-color" content="#0a0b0e">
 <link rel="canonical" href="{canon}">
 <link rel="icon" type="image/png" href="/assets/img/favicon.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
@@ -146,8 +145,8 @@ def head(title, desc, url, schemas=(), image=OG, noindex=False, extra_css=""):
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{image}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/base.css"><link rel="stylesheet" href="/assets/css/pages.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/site.css">
 {jd(ORG)}{"".join(jd(s) for s in schemas)}
 <noscript><style>.reveal{{opacity:1;transform:none}}</style></noscript>
 </head>'''
@@ -254,26 +253,30 @@ def build_home():
     mats = "".join(f'<article class="card reveal"><div class="kind">Material</div><h3>{E(MATERIALS[m]["name"])}</h3><p class="std">{E(MATERIALS[m]["short"])}</p><p class="std"><a href="{fmat(m)}">Buttweld fittings</a> · <a href="{flmat(m)}">Flanges</a></p></article>' for m in MATERIALS_ORDER)
     posts = "".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG[-3:][::-1])
     body = f'''<main id="main">
-<div class="hero" id="top"><div class="wrap">
-  <p class="eyebrow gold">Manufacturer &amp; exporter · USA and Canada</p>
-  <h1>Buttweld fittings &amp; flanges, <em>made to ship.</em></h1>
-  <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India since 2005, with EN 10204 3.1 certificates.</p>
+<div class="hero" id="top">
+  <aside class="hero-panel" aria-label="Contact details"><div class="blk"><div><b>Contacts</b><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><a href="tel:+919372603602">+91 93726 03602</a></div><div><b>Works</b>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, India</div></div><div><b>Ships to</b>USA · Canada</div></aside>
+  <div class="hero-main"><p class="topline">Manufacturer &amp; exporter since 2005 · ISO 9001:2015 · PED · IBR</p>
+    <h1><span>Buttweld fittings</span><span class="ln">&amp; flanges,</span><span class="ln">made to ship.</span></h1>
+    <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India, with EN 10204 3.1 certificates.</p>
+    <div class="cta"><a class="btn btn-gold" href="/request-a-quote/">Get a quote in 24 hours</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div></div>
+</div>
+<section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Our range</p><h2>Our range ↳ in motion</h2></div></div>
   <div class="orbit" role="region" aria-roledescription="carousel" aria-label="Neo Impex product range">
-    <div class="orbit-stage" id="stage"><div class="orbit-ring" aria-hidden="true"><svg viewBox="0 0 1000 230" preserveAspectRatio="none"><ellipse cx="500" cy="115" rx="498" ry="113" fill="none" stroke="#f1dec0" stroke-opacity=".55" stroke-width="1.5" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/></svg></div>
+    <div class="orbit-stage" id="stage"><div class="orbit-ring" aria-hidden="true"><svg viewBox="0 0 1000 230" preserveAspectRatio="none"><ellipse cx="500" cy="115" rx="498" ry="113" fill="none" stroke="#f1dec0" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/></svg></div>
       <div class="orbit-glow" aria-hidden="true"></div><img class="orbit-mark" src="/assets/img/mark-white.png" alt="" aria-hidden="true"></div>
     <div class="orbit-caption" id="caption" aria-live="off"><span class="tag" id="capTag">Flanges</span><h2 id="capTitle">Weld neck flanges</h2><p id="capText">WNRF and RTJ for high-pressure and critical service.</p>
-      <a class="more" id="capLink" href="/flanges/weld-neck/">View product →</a> <a class="more" id="capQuote" href="/request-a-quote/">· Request a quote</a></div>
+      <a class="more" id="capLink" href="/flanges/weld-neck/">View product →</a><a class="more" id="capQuote" href="/request-a-quote/">Request a quote →</a></div>
     <div class="orbit-controls"><button class="arrow" id="prev" aria-label="Previous product">←</button><div class="dots" id="dots"></div><button class="arrow" id="next" aria-label="Next product">→</button></div>
-    <div class="cta" style="margin-top:20px"><a class="btn btn-gold" href="/request-a-quote/">Get a quote in 24 hours</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div>
-  </div>
-  <div class="stats"><div><strong>Since 2005</strong><span>20+ years in piping</span></div><div><strong>25+</strong><span>Countries supplied</span></div><div><strong>ISO 9001:2015</strong><span>PED · IBR approved</span></div><div><strong>24 h</strong><span>Quote reply</span></div></div>
-</div></div>
+  </div></section>
+<section class="statement"><div class="wrap"><p class="big reveal">Neo Impex has forged and fabricated buttweld fittings and flanges in Vadodara since 2005. We forge, form, bend, machine and test in our own works.</p>
+  <p class="small reveal">We supply distributors, fabricators and contractors in the USA and Canada with heat-traceable EN 10204 3.1 certificates, MSS SP-25 marking and your choice of FOB, CIF or DAP terms.</p>
+  <div class="stats reveal"><div><strong>20+</strong><span>Years in piping, since 2005</span></div><div><strong>25+</strong><span>Countries supplied</span></div><div><strong>72″</strong><span>Largest welded fitting</span></div><div><strong>60″</strong><span>Largest forged flange</span></div></div></div></section>
 <div class="supplied"><div class="wrap"><span class="lbl">Standards we make to</span><ul><li>ASME B16.9</li><li>ASME B16.5</li><li>ASME B16.47</li><li>MSS SP-43</li><li>MSS SP-25</li><li>EN 10204 3.1</li><li>NACE MR0175</li></ul></div></div>
 
 <section class="soft"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Products</p><h2>Two product lines. Every size, class and grade.</h2><p>Buttweld fittings seamless to 24″ and welded to 72″. Forged flanges from ½″ to 60″ in Class 150 to 2500.</p></div>
   <div class="families">
-   <article class="family reveal"><div class="photo"><img src="/assets/img/stainless-fittings-group.jpg" alt="Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">Seamless to 24″ · welded to 72″</span><h3>Buttweld fittings &amp; bends</h3><p>Elbows, tees, reducers, caps, stub ends, crosses, return bends, and 3D/5D/10D and piggable bends.</p><a class="btn btn-gold" href="/buttweld-fittings/">Explore buttweld fittings</a></div></article>
-   <article class="family reveal"><div class="photo"><img src="/assets/img/flange-range.jpg" alt="Black forged flanges in four sizes" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">½″ to 60″ · Class 150–2500</span><h3>Forged flanges</h3><p>Weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ and long weld neck – ASME B16.5 and B16.47.</p><a class="btn btn-gold" href="/flanges/">Explore flanges</a></div></article>
+   <article class="family reveal"><div class="photo"><img src="/assets/img/stainless-fittings-group.jpg" alt="Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">Seamless to 24″ · welded to 72″</span><h3>Buttweld fittings &amp; bends</h3><p>Elbows, tees, reducers, caps, stub ends, crosses, return bends, and 3D/5D/10D and piggable bends.</p><a class="btn btn-blue" href="/buttweld-fittings/">Explore buttweld fittings</a></div></article>
+   <article class="family reveal"><div class="photo"><img src="/assets/img/flange-range.jpg" alt="Black forged flanges in four sizes" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">½″ to 60″ · Class 150–2500</span><h3>Forged flanges</h3><p>Weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ and long weld neck – ASME B16.5 and B16.47.</p><a class="btn btn-blue" href="/flanges/">Explore flanges</a></div></article>
   </div></div></section>
 
 <section class="content alt"><div class="wrap"><h2 class="h2 reveal">Popular products</h2><div class="lcards reveal">{fit_cards}</div><div class="lcards reveal" style="margin-top:16px">{fl_cards}</div></div></section>
