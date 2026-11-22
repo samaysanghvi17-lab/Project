@@ -123,6 +123,14 @@
   var pre = qs('product');
   if (pre) { [].forEach.call(document.querySelectorAll('form.lead-form'), function (form) {
     var m = form.elements['message']; if (m && !m.value) m.value = 'Enquiry about: ' + pre + '\n';
+    var sel = form.elements['product'];
+    if (sel) {
+      var t = pre.toLowerCase(), want = '';
+      if (/data sheet|catalogue/.test(t)) want = 'Data sheet / catalogue';
+      else if (/flange/.test(t)) want = /fitting/.test(t) ? 'Buttweld fittings and flanges' : 'Flanges';
+      else if (/fitting|elbow|tee|reducer|cap|stub|cross|bend/.test(t)) want = 'Buttweld fittings';
+      for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].text === want) sel.selectedIndex = i; }
+    }
   }); }
 
   /* track outbound contact clicks */

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /tools/
+
+Sitemap: https://neoimpexglobal.com/sitemap.xml

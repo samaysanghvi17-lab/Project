@@ -32,7 +32,7 @@ EXPORT = {
  "canada": dict(
   name="Canada", h1="Buttweld Fittings and Flanges for Canada",
   title="Buttweld Fittings & Flanges Supplier for Canada",
-  desc="Direct from the manufacturer: ASME B16.9 buttweld fittings and B16.5 flanges for Canadian distributors, fabricators and contractors, with 3.1 certificates and export documents.",
+  desc="ASME B16.9 buttweld fittings and B16.5 flanges direct from the manufacturer for Canadian distributors, fabricators and contractors, with 3.1 certificates.",
   kw=("buttweld fittings supplier Canada", ["flanges supplier Canada from India", "ASME B16.5 flanges Canada import", "pipe fittings exporter India Canada", "low temperature flanges A350 LF2 Canada"]),
   lead="Neo Impex makes buttweld fittings, bends and forged flanges in Vadodara, India, for Canadian distributors, fabricators and contractors. Cold-climate service, large sizes and special alloys are our strengths.",
   sections=[
@@ -182,7 +182,7 @@ BLOG = [
  dict(slug="import-buttweld-fittings-flanges-india-to-usa", date="2026-11-19",
   title="Importing Buttweld Fittings and Flanges from India to the USA",
   h1="Importing Buttweld Fittings and Flanges from India to the USA",
-  desc="A practical checklist for US importers: documents, marking, HTS codes, importer security filing, duties and Buy America checks when buying fittings and flanges from India.",
+  desc="A checklist for US importers: documents, marking, HTS codes, importer security filing, duties and Buy America checks when buying fittings and flanges from India.",
   kw=("import pipe fittings from India to USA", ["importing flanges from India", "HTS code butt welding fittings", "buy flanges from India"]),
   intro="Buying fittings and flanges direct from an Indian manufacturer can cut cost and give you access to special sizes and alloys. A good import goes smoothly when you have the paperwork, marking and duty position settled before you order. This is a general checklist, not legal or customs advice.",
   body=[

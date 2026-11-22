@@ -1,0 +1,16 @@
+# Neo Impex static site
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+# keep build tooling and version-control files private
+RedirectMatch 404 ^/(tools|\.git)(/|$)
+<FilesMatch "\.(py|csv|md|zip)$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

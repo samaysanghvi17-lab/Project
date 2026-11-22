@@ -25,7 +25,8 @@ nav.main a.active{color:var(--impact);border-color:var(--gold)}
 .phero{position:relative;overflow:hidden;color:#fff;padding:clamp(44px,6vw,80px) 0 clamp(44px,6vw,72px);background:radial-gradient(800px 360px at 85% 20%,rgba(145,173,236,.5),transparent 70%),radial-gradient(600px 300px at 0% 100%,rgba(215,163,80,.2),transparent 70%),linear-gradient(180deg,#0b3c9c 0%,#1d4db9 100%)}
 .phero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 60%);mask-image:linear-gradient(90deg,transparent,#000 60%)}
 .phero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
-.phero.single .wrap{grid-template-columns:1fr;max-width:900px}
+.phero.single .wrap{grid-template-columns:1fr}
+.phero.single .wrap>div{max-width:860px}
 .phero h1{font-size:clamp(30px,4.4vw,54px);color:#fff;margin:14px 0 16px;text-wrap:balance}
 .phero .lede{color:#e3ebfc;font-size:clamp(15.5px,1.4vw,18px);max-width:60ch}
 .phero .chips{margin-top:20px;padding-top:0}
@@ -57,12 +58,12 @@ nav.main a.active{color:var(--impact);border-color:var(--gold)}
 .panel.blue p{color:#e3ebfc;font-size:15px;margin-bottom:14px}
 
 /* spec table */
-.spec{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:15px}
-.spec th,.spec td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-.spec tr:last-child th,.spec tr:last-child td{border-bottom:0}
-.spec th{width:34%;background:var(--sky-5);color:var(--navy);font-weight:600}
+.spectbl{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:15px}
+.spectbl th,.spectbl td{padding:13px 16px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.spectbl tr:last-child th,.spectbl tr:last-child td{border-bottom:0}
+.spectbl th{width:34%;background:var(--sky-5);color:var(--navy);font-weight:600}
 .tblwrap{overflow-x:auto;border-radius:16px;border:1px solid var(--line);background:#fff;-webkit-overflow-scrolling:touch}
-.tblwrap .spec{border:0;border-radius:0}
+.tblwrap .spectbl{border:0;border-radius:0}
 .dtable{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
 .dtable th,.dtable td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
 .dtable th:first-child,.dtable td:first-child{text-align:left}
@@ -138,7 +139,7 @@ input[type=file]{padding:11px 12px;background:#fff}
 }
 @media (max-width:620px){
   .lcards,.lcards.three,.bcards,.steps.three{grid-template-columns:1fr}
-  .spec th{width:42%}
+  .spectbl th{width:42%}
   .cta-band{border-radius:22px}
 }
 
@@ -150,6 +151,17 @@ input[type=file]{padding:11px 12px;background:#fff}
   .phero::before{display:none}
   .phero h1,.phero .lede{color:#000}
   .content,.content.alt{background:#fff;padding:12pt 0}
-  .panel,.spec,.tblwrap{box-shadow:none;break-inside:avoid}
+  .panel,.spectbl,.tblwrap{box-shadow:none;break-inside:avoid}
   a{color:#000;text-decoration:none}
 }
+
+/* additions */
+.matcard{height:100%;width:100%;display:grid;place-items:center;background:linear-gradient(135deg,#e5ebfa,#c3d2f5)}
+.matcard span{font:800 clamp(34px,6vw,64px)/1 var(--display);font-stretch:118%;color:var(--depth);text-align:center;padding:16px}
+.lcard .art .grade{font:800 24px/1.1 var(--display);font-stretch:112%;color:var(--depth);text-align:center;padding:0 8px}
+.pvisual.art{background:#f3f6fd}
+.prose-wide{max-width:980px}
+.family .body .btn{align-self:flex-start;margin-top:auto}
+.orbit-caption .more+.more{margin-left:8px}
+.dtable.text th,.dtable.text td{text-align:left}
+.orbit-mark{opacity:.08}

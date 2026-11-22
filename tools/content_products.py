@@ -73,7 +73,7 @@ FITTINGS = {
   name="Buttweld Reducers", short="Concentric and eccentric reducers",
   h1="Buttweld Reducers: Concentric and Eccentric",
   title="Buttweld Reducers Manufacturer & Exporter | USA, Canada",
-  desc="Concentric and eccentric ASME B16.9 buttweld reducers in stainless, duplex, carbon, alloy and nickel alloys. Seamless to 24″, welded to 72″. Export to USA and Canada.",
+  desc="Concentric and eccentric ASME B16.9 buttweld reducers in stainless, duplex, carbon, alloy and nickel. Seamless to 24″, welded to 72″. Export to USA, Canada.",
   kw=("buttweld reducer manufacturer", ["concentric reducer ASME B16.9", "eccentric reducer supplier", "stainless steel butt weld reducer", "pipe reducer exporter India"]),
   chips=["ASME B16.9", "Concentric", "Eccentric"],
   intro=[
