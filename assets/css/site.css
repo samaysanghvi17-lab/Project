@@ -428,3 +428,23 @@ footer{background:var(--ink);color:var(--muted-d);padding:70px 0 28px;font-size:
 .fullbleed .cta{display:flex;gap:10px;flex-wrap:wrap}
 .fullbleed .cap{position:absolute;right:var(--gutter);bottom:clamp(40px,6vw,72px);z-index:1;font-family:var(--mono);text-transform:uppercase;font-size:11px;letter-spacing:.04em;color:#cfd2da;max-width:28ch;text-align:right}
 @media (max-width:760px){.fullbleed .cap{display:none}.fullbleed{min-height:560px}}
+
+/* certifications */
+.certs{background:var(--paper);border-top:1px solid var(--line)}
+.lcard .kind{font-family:var(--mono);text-transform:uppercase;font-size:11px;color:var(--accent);letter-spacing:.04em}
+.lcard:hover .kind{color:var(--gold-2)}
+.ccard .thumb{height:210px;overflow:hidden;border:1px solid var(--line);background:#fff;margin-bottom:14px}
+.ccard .thumb img{width:100%;height:100%;object-fit:cover;object-position:top}
+.ccard .thumb.tile{display:grid;place-items:center;background:var(--accent);border-color:var(--accent)}
+.ccard .thumb.tile span{font:500 14px/1.4 var(--mono);text-align:center;padding:14px;color:#fff;word-break:break-all}
+.cert{display:grid;grid-template-columns:300px 1fr;gap:clamp(24px,4vw,56px);padding:44px 0;border-top:1px solid var(--line);scroll-margin-top:90px}
+.cert:first-child{border-top:0;padding-top:0}
+.cert h2{font-size:clamp(26px,3.4vw,46px);text-transform:uppercase;font-weight:500;letter-spacing:-.04em;line-height:.96;margin:10px 0 22px}
+.certimg{display:block;border:1px solid var(--line);background:#fff;box-shadow:0 22px 40px -26px rgba(0,0,0,.45)}
+.certimg img{width:100%;height:auto}
+.certimg.tile{aspect-ratio:3/4;display:grid;place-items:center;align-content:center;gap:14px;text-align:center;padding:20px;background:var(--accent);color:#fff;border-color:var(--accent)}
+.certimg.tile span{font:500 15px/1.35 var(--mono);word-break:break-all}
+.certimg.tile small{font:500 11px var(--mono);text-transform:uppercase;opacity:.85}
+@media (max-width:760px){.cert{grid-template-columns:1fr}.certimg{max-width:320px}}
+/* readability: keep small mono labels at 11.5px+ */
+.crumbs{font-size:12px}.chips span,.stats span,.hero-panel{font-size:11.5px}.bcard time,.card .kind,.family .spec{font-size:11.5px}

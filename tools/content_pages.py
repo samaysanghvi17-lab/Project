@@ -81,7 +81,7 @@ PIPE = [  # NPS, DN, OD in, OD mm, S40 in, S40 mm, S80 in, S80 mm
  ("24", 600, "24.000", "609.6", "0.688", "17.48", "1.218", "30.96"),
 ]
 
-# 90 degree elbow centre-to-end (ASME B16.9 / B16.28): long radius = 1.5 x NPS, short radius = 1.0 x NPS, NPS 1 and larger
+# 90 degree elbow center-to-end (ASME B16.9 / B16.28): long radius = 1.5 x NPS, short radius = 1.0 x NPS, NPS 1 and larger
 ELBOW_SIZES = [("1", 1.0, 38, 25), ("1¼", 1.25, 48, 32), ("1½", 1.5, 57, 38), ("2", 2, 76, 51), ("2½", 2.5, 95, 64),
                ("3", 3, 114, 76), ("4", 4, 152, 102), ("6", 6, 229, 152), ("8", 8, 305, 203), ("10", 10, 381, 254),
                ("12", 12, 457, 305), ("14", 14, 533, 356), ("16", 16, 610, 406), ("18", 18, 686, 457), ("20", 20, 762, 508), ("24", 24, 914, 610)]
@@ -102,14 +102,14 @@ DATASHEETS = {
   kw=("flanges data sheet", ["ASME B16.5 specification sheet", "forged flange specification"])),
  "pipe-schedule-chart": dict(
   title="Pipe Schedule Chart | NPS, OD and Wall Thickness",
-  desc="Free pipe schedule chart: NPS, DN, outside diameter and wall thickness for Sch 40 and Sch 80, in inches and millimetres, plus 90° elbow centre-to-end dimensions.",
+  desc="Free pipe schedule chart: NPS, DN, outside diameter and wall thickness for Sch 40 and Sch 80, in inches and millimeters, plus 90° elbow center-to-end dimensions.",
   h1="Pipe Schedule Chart and Elbow Dimensions",
   kw=("pipe schedule chart", ["pipe schedule 40 80 dimensions", "NPS OD wall thickness chart", "90 degree elbow center to end dimensions"])),
 }
 
 # ---------------------------------------------------------------- BLOG
 BLOG = [
- dict(slug="seamless-vs-welded-buttweld-fittings", date="2026-11-10",
+ dict(slug="seamless-vs-welded-buttweld-fittings", date="2026-11-22",
   title="Seamless vs Welded Buttweld Fittings: Which to Choose",
   h1="Seamless vs Welded Buttweld Fittings: Which Should You Choose?",
   desc="How seamless and welded buttweld fittings are made, where each is used, and what to ask your supplier about size limits, radiography and certificates.",
@@ -123,7 +123,7 @@ BLOG = [
   ],
   related=[("/buttweld-fittings/elbows/", "Buttweld elbows"), ("/buttweld-fittings/tees/", "Buttweld tees"), ("/data-sheets/buttweld-fittings/", "Buttweld fittings data sheet")]),
 
- dict(slug="316-vs-316l-stainless-steel", date="2026-11-12",
+ dict(slug="316-vs-316l-stainless-steel", date="2026-11-22",
   title="316 vs 316L Stainless Steel for Flanges and Fittings",
   h1="316 vs 316L Stainless Steel: What Is the Difference?",
   desc="316 and 316L stainless differ mainly in carbon content. Learn what that means for welding, strength and dual certification when buying flanges and buttweld fittings.",
@@ -137,7 +137,7 @@ BLOG = [
   ],
   related=[("/buttweld-fittings/materials/ss-316-316l/", "316/316L buttweld fittings"), ("/flanges/materials/ss-316-316l/", "316/316L flanges")]),
 
- dict(slug="asme-b16-9-vs-mss-sp-43", date="2026-11-14",
+ dict(slug="asme-b16-9-vs-mss-sp-43", date="2026-11-22",
   title="ASME B16.9 vs MSS SP-43: Standard and Light-Wall Fittings",
   h1="ASME B16.9 vs MSS SP-43: Standard and Light-Wall Stainless Fittings",
   desc="ASME B16.9 and MSS SP-43 both cover buttweld fittings. Learn how they differ, when light-wall fittings are used and what to state in your purchase order.",
@@ -151,7 +151,7 @@ BLOG = [
   ],
   related=[("/buttweld-fittings/elbows/", "Buttweld elbows"), ("/buttweld-fittings/stub-ends/", "Stub ends"), ("/data-sheets/pipe-schedule-chart/", "Pipe schedule chart")]),
 
- dict(slug="weld-neck-vs-slip-on-flange", date="2026-11-16",
+ dict(slug="weld-neck-vs-slip-on-flange", date="2026-11-22",
   title="Weld Neck vs Slip-On Flanges: How to Choose",
   h1="Weld Neck vs Slip-On Flanges: How to Choose",
   desc="Compare weld neck and slip-on flanges on strength, cost, welding and typical use, so you can specify the right flange for your piping.",
@@ -165,7 +165,7 @@ BLOG = [
   ],
   related=[("/flanges/weld-neck/", "Weld neck flanges"), ("/flanges/slip-on/", "Slip-on flanges")]),
 
- dict(slug="how-to-read-flange-markings", date="2026-11-18",
+ dict(slug="how-to-read-flange-markings", date="2026-11-22",
   title="How to Read ASME B16.5 Flange Markings",
   h1="How to Read ASME B16.5 Flange Markings",
   desc="What the stamps on a flange rim mean: manufacturer, ASTM material, pressure class, standard, size and heat number, and how to check them against your certificate.",
@@ -179,7 +179,7 @@ BLOG = [
   ],
   related=[("/flanges/", "Forged flanges"), ("/flanges/weld-neck/", "Weld neck flanges")]),
 
- dict(slug="import-buttweld-fittings-flanges-india-to-usa", date="2026-11-19",
+ dict(slug="import-buttweld-fittings-flanges-india-to-usa", date="2026-11-22",
   title="Importing Buttweld Fittings and Flanges from India to the USA",
   h1="Importing Buttweld Fittings and Flanges from India to the USA",
   desc="A checklist for US importers: documents, marking, HTS codes, importer security filing, duties and Buy America checks when buying fittings and flanges from India.",
@@ -195,7 +195,7 @@ BLOG = [
   ],
   related=[("/export/usa/", "Supply to the USA"), ("/blog/incoterms-for-pipe-fittings-export/", "Incoterms for pipe fittings")]),
 
- dict(slug="incoterms-for-pipe-fittings-export", date="2026-11-20",
+ dict(slug="incoterms-for-pipe-fittings-export", date="2026-11-22",
   title="Incoterms for Pipe Fittings Export: FOB, CIF, DAP, DDP",
   h1="Incoterms for Pipe Fittings Export: FOB, CIF, DAP and DDP",
   desc="What FOB, CIF, DAP and DDP mean when you buy buttweld fittings and flanges from India, who pays for what, and how to compare quotes on landed cost.",

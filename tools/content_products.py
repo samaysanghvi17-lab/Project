@@ -13,7 +13,7 @@ FL_MATS = ("SS 304/304L, 316/316L, duplex F51/F60, super duplex F53/F55, A105, "
 
 FIT_COMMON = [
     ("Size range", "Seamless up to 24″ · welded up to 72″ (NPS)"),
-    ("End preparation", "Bevelled for butt welding (ASME B16.25)"),
+    ("End preparation", "Beveled for butt welding (ASME B16.25)"),
     ("Materials", FIT_MATS),
     ("Marking and documents", "MSS SP-25 marking · heat traceable · EN 10204 3.1 certificate"),
 ]

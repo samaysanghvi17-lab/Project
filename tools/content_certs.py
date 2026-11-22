@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+"""Certificates and registrations. Wording follows the supplied certificate documents exactly where quoted."""
+
+CERTS = [
+ dict(
+  key="iso", short="ISO 9001:2015", title="ISO 9001:2015 – Quality Management System",
+  kind="Quality management",
+  issuer="Royal Impact Certification Ltd. (RICL), Noida, India",
+  extra_issuer="Accreditation shown on the certificate: United Accreditation Foundation (UAF), a member of the International Accreditation Forum (IAF)",
+  number="24RN04BE (also printed: QC/IV/15/103332)",
+  scope="Manufacturing, exports and supply of stainless steel, carbon steel, alloy steel, butt welded pipes fittings, forged fittings & flanges and trading of pipes & tubes.",
+  validity="Initial certification April 5, 2024. Surveillance audits due by March 4, 2025 and March 4, 2026. Certification valid until April 4, 2027, subject to successful surveillance audits.",
+  card_line="Certified until Apr 4, 2027, subject to surveillance audits",
+  meaning="Our quality management system has been assessed against ISO 9001:2015 for the activities listed in the scope.",
+  verify="The certificate can be verified at iafcertsearch.org, uafaccreditation.org or ricliso.com (as printed on the certificate).",
+  pdf="/assets/docs/neo-impex-iso-9001-2015-certificate.pdf", img="/assets/img/cert-iso.jpg"),
+ dict(
+  key="ped", short="PED 2014/68/EU", title="PED 2014/68/EU – Material Manufacturer Approval",
+  kind="Pressure Equipment Directive",
+  issuer="TÜV Rheinland Polska Sp. z o.o., Certification Body for Material Manufacturers, Zabrze, Poland",
+  extra_issuer="",
+  number="01 2627 IN/M1-210005.01",
+  scope="Manufacture of Stainless Steel, Carbon Steel & Alloy Steel Flanges, Pipe Fittings and Forgings.",
+  validity="December 22, 2024 to December 21, 2027.",
+  card_line="Valid Dec 22, 2024 to Dec 21, 2027",
+  meaning="A quality-assurance approval for manufacturers of materials under the EU Pressure Equipment Directive 2014/68/EU (Annex I, point 4.3). The quality system was audited to EN 764-5 clause 4.2 and AD 2000-Merkblatt W 0.",
+  verify="Contact the certification body named on the certificate (post@pl.tuv.com) to confirm the certificate number.",
+  pdf="/assets/docs/neo-impex-ped-2014-68-eu-material-manufacturer-certificate.pdf", img="/assets/img/cert-ped.jpg"),
+ dict(
+  key="ibr", short="IBR workshop approval", title="IBR 1950 – Workshop Approval for Pipe Fittings",
+  kind="Indian Boiler Regulations",
+  issuer="Office of the Director of Boilers, Gujarat State, Ahmedabad, India",
+  extra_issuer="",
+  number="DOB/TECH/2026/CA062026-20270002388, dated August 1, 2026 (extends first approval DOB/TECH/2019/CA062019-20200000280, September 23, 2019)",
+  scope="Manufacturing of Carbon Steel, Alloy steel and Stainless Steel Seamless / ERW Pipe Fittings up to 24″, 30 mm thickness, under inspection of IBR-1950.",
+  validity="August 20, 2026 to August 19, 2028.",
+  card_line="Valid Aug 20, 2026 to Aug 19, 2028",
+  meaning="Approval of our workshop to make the pipe fittings listed in the scope under inspection of the Indian Boilers Regulations, 1950. The approval is limited to the sizes and thickness stated. Ask us which approval applies to your item.",
+  verify="Issued by the Office of the Director of Boilers, Gujarat State (boiler.gujarat.gov.in).",
+  pdf="/assets/docs/neo-impex-ibr-workshop-approval-2026-2028.pdf", img="/assets/img/cert-ibr.jpg"),
+ dict(
+  key="udyam", short="Udyam (MSME)", title="Udyam Registration – MSME, Government of India",
+  kind="Government registration",
+  issuer="Ministry of Micro, Small and Medium Enterprises, Government of India",
+  extra_issuer="",
+  number="UDYAM-GJ-24-0008643",
+  scope="Major activity: Manufacturing. Enterprise type: Small (classified Small for 2022-23 to 2026-27). Registered as M/S Neo Impex Stainless Private Ltd.",
+  validity="Udyam registration date: November 5, 2020. Date of incorporation: April 4, 2005. Date of commencement of production or business shown on the registration: April 1, 2010.",
+  card_line="Registration UDYAM-GJ-24-0008643",
+  meaning="Registration of the enterprise as a Small manufacturing enterprise on the Government of India’s Udyam portal.",
+  verify="The registration can be verified on udyamregistration.gov.in. A copy is available on request.",
+  pdf="", img=""),
+]

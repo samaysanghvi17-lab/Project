@@ -99,8 +99,11 @@
       if (!validate(form)) return;
       var submit = form.querySelector('button[type=submit]'); var label = submit ? submit.textContent : '';
       if (submit) { submit.disabled = true; submit.textContent = 'Sending…'; }
+      var started = Number((form.elements['started'] || {}).value) || Date.now();
+      var wait = Math.max(0, 2700 - (Date.now() - started));
       var fd = new FormData(form);
-      fetch(ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+      new Promise(function (r) { setTimeout(r, wait); })
+        .then(function () { return fetch(ENDPOINT, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } }); })
         .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }); })
         .then(function (res) {
           if (res.body && res.body.ok) {

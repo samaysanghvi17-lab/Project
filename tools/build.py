@@ -4,6 +4,7 @@ import csv, html, json, os, shutil, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from content_products import FITTINGS, FITTINGS_ORDER, FLANGES, FLANGES_ORDER
 from content_materials import MATERIALS, MATERIALS_ORDER
+from content_certs import CERTS
 from content_pages import EXPORT, EXPORT_HUB, DATASHEETS, BLOG, PIPE, ELBOW_SIZES, DS_NOTE
 
 SITE = "https://neoimpexglobal.com"
@@ -13,7 +14,7 @@ OG = SITE + "/assets/img/og-image.jpg"
 PHONE_WA = "919316631458"
 E = html.escape
 
-GENERATED_DIRS = ["buttweld-fittings", "flanges", "data-sheets", "export", "blog", "request-a-quote", "privacy-policy"]
+GENERATED_DIRS = ["buttweld-fittings", "flanges", "data-sheets", "export", "blog", "request-a-quote", "privacy-policy", "certifications", "about"]
 PAGES = []      # (url, title, description, primary keyword, secondary keywords)
 WARN = []
 
@@ -81,6 +82,7 @@ def art(kind):
 
 # ----------------------------------------------------------------- navigation and chrome
 def nav_html(active):
+    active = {"ds": "res", "blog": "res"}.get(active, active)
     def a(href, text, key=None):
         cls = ' class="active"' if key and key == active else ""
         return f'<a href="{href}"{cls}>{text}</a>'
@@ -90,8 +92,8 @@ def nav_html(active):
       <div class="has-sub">{a("/buttweld-fittings/", "Buttweld Fittings", "fit")}<div class="sub"><span class="grp">Types</span>{fit}<hr><a href="/buttweld-fittings/#materials">By material →</a></div></div>
       <div class="has-sub">{a("/flanges/", "Flanges", "fl")}<div class="sub"><span class="grp">Types</span>{fl}<hr><a href="/flanges/#materials">By material →</a></div></div>
       <div class="has-sub">{a("/export/", "Export", "exp")}<div class="sub"><a href="/export/usa/">USA</a><a href="/export/canada/">Canada</a></div></div>
-      {a("/data-sheets/", "Data sheets", "ds")}
-      {a("/blog/", "Blog", "blog")}
+      <div class="has-sub">{a("/data-sheets/", "Resources", "res")}<div class="sub"><a href="/data-sheets/">Data sheets</a><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a><a href="/blog/">Blog</a></div></div>
+      <div class="has-sub">{a("/about/", "Company", "co")}<div class="sub"><a href="/about/">About us</a><a href="/certifications/">Certifications</a><a href="/request-a-quote/">Contact</a></div></div>
     </nav>'''
 
 def header(active):
@@ -114,15 +116,15 @@ def footer():
       <span><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><br><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><br><a href="tel:+919372603602">+91 93726 03602</a> · <a href="tel:+912266393943">+91 22 6639 3943</a> / <a href="tel:+912266393944">44</a></span></address></div>
     <div><h4>Buttweld fittings</h4><ul>{fit}<li><a href="/buttweld-fittings/#materials">By material</a></li></ul></div>
     <div><h4>Flanges</h4><ul>{fl}<li><a href="/flanges/#materials">By material</a></li></ul></div>
-    <div><h4>Resources</h4><ul><li><a href="/data-sheets/">Data sheets</a></li><li><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a></li><li><a href="/blog/">Blog</a></li><li><a href="/export/usa/">Export to the USA</a></li><li><a href="/export/canada/">Export to Canada</a></li><li><a href="/request-a-quote/">Request a quote</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
+    <div><h4>Resources</h4><ul><li><a href="/data-sheets/">Data sheets</a></li><li><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a></li><li><a href="/blog/">Blog</a></li><li><a href="/export/usa/">Export to the USA</a></li><li><a href="/export/canada/">Export to Canada</a></li><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/request-a-quote/">Request a quote</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
   </div>
-  <div class="legal"><span>© 2026 Neo Impex Stainless Pvt. Ltd. · neoimpexglobal.com</span><span>Est. 2005 · Connecting Pipelines</span></div>
+  <div class="legal"><span>© 2026 Neo Impex Stainless Pvt. Ltd. · neoimpexglobal.com</span><span>Established 2005 · Vadodara, India</span></div>
 </div></footer>
 <a class="wa-float" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat with Neo Impex on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a>
 <script src="/assets/js/config.js"></script><script src="/assets/js/site.js" defer></script>'''
 
 ORG = {"@context": "https://schema.org", "@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd.", "url": SITE + "/",
-       "logo": SITE + "/assets/img/logo.png", "slogan": "Connecting Pipelines", "foundingDate": "2005",
+       "logo": SITE + "/assets/img/logo.png", "foundingDate": "2005", "legalName": "Neo Impex Stainless Pvt. Ltd.",
        "email": "kartik@neoimpex.com", "telephone": "+91 93166 31458",
        "address": {"@type": "PostalAddress", "streetAddress": "Plot No. C1/B-270, GIDC Por, Ramangamdi", "addressLocality": "Vadodara", "postalCode": "391243", "addressRegion": "Gujarat", "addressCountry": "IN"}}
 
@@ -255,12 +257,12 @@ def build_home():
     body = f'''<main id="main">
 <div class="hero" id="top">
   <aside class="hero-panel" aria-label="Contact details"><div class="blk"><div><b>Contacts</b><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><a href="tel:+919372603602">+91 93726 03602</a></div><div><b>Works</b>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, India</div></div><div><b>Ships to</b>USA · Canada</div></aside>
-  <div class="hero-main"><p class="topline">Manufacturer &amp; exporter since 2005 · ISO 9001:2015 · PED · IBR</p>
+  <div class="hero-main"><p class="topline">Established 2005 · ISO 9001:2015 · PED 2014/68/EU · IBR workshop approval</p>
     <h1><span>Buttweld fittings</span><span class="ln">&amp; flanges,</span><span class="ln">made to ship.</span></h1>
     <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India, with EN 10204 3.1 certificates.</p>
     <div class="cta"><a class="btn btn-gold" href="/request-a-quote/">Get a quote in 24 hours</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div></div>
 </div>
-<section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Our range</p><h2>Our range ↳ in motion</h2></div></div>
+<section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Product range</p><h2>Our range ↳ in motion</h2></div></div>
   <div class="orbit" role="region" aria-roledescription="carousel" aria-label="Neo Impex product range">
     <div class="orbit-stage" id="stage"><div class="orbit-ring" aria-hidden="true"><svg viewBox="0 0 1000 230" preserveAspectRatio="none"><ellipse cx="500" cy="115" rx="498" ry="113" fill="none" stroke="#f1dec0" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/></svg></div>
       <div class="orbit-glow" aria-hidden="true"></div><img class="orbit-mark" src="/assets/img/mark-white.png" alt="" aria-hidden="true"></div>
@@ -268,10 +270,12 @@ def build_home():
       <a class="more" id="capLink" href="/flanges/weld-neck/">View product →</a><a class="more" id="capQuote" href="/request-a-quote/">Request a quote →</a></div>
     <div class="orbit-controls"><button class="arrow" id="prev" aria-label="Previous product">←</button><div class="dots" id="dots"></div><button class="arrow" id="next" aria-label="Next product">→</button></div>
   </div></section>
-<section class="statement"><div class="wrap"><p class="big reveal">Neo Impex has forged and fabricated buttweld fittings and flanges in Vadodara since 2005. We forge, form, bend, machine and test in our own works.</p>
+<section class="statement"><div class="wrap"><p class="big reveal">Neo Impex, established in 2005, makes buttweld fittings and forged flanges at its own works in Vadodara. We forge, form, bend, machine and test in house.</p>
   <p class="small reveal">We supply distributors, fabricators and contractors in the USA and Canada with heat-traceable EN 10204 3.1 certificates, MSS SP-25 marking and your choice of FOB, CIF or DAP terms.</p>
-  <div class="stats reveal"><div><strong>20+</strong><span>Years in piping, since 2005</span></div><div><strong>25+</strong><span>Countries supplied</span></div><div><strong>72″</strong><span>Largest welded fitting</span></div><div><strong>60″</strong><span>Largest forged flange</span></div></div></div></section>
+  <div class="stats reveal"><div><strong>2005</strong><span>Year established</span></div><div><strong>25+</strong><span>Countries supplied</span></div><div><strong>72″</strong><span>Largest welded fitting</span></div><div><strong>60″</strong><span>Largest forged flange</span></div></div></div></section>
 <div class="supplied"><div class="wrap"><span class="lbl">Standards we make to</span><ul><li>ASME B16.9</li><li>ASME B16.5</li><li>ASME B16.47</li><li>MSS SP-43</li><li>MSS SP-25</li><li>EN 10204 3.1</li><li>NACE MR0175</li></ul></div></div>
+
+<section class="certs"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Certifications</p><h2>Certified and approved.</h2><p>ISO 9001:2015, PED 2014/68/EU material manufacturer approval, IBR workshop approval and Udyam registration. Each page shows the exact scope and validity.</p></div><div class="reveal">{certs_cards()}</div><p class="note"><a href="/certifications/">See every certificate and what each one covers →</a></p></div></section>
 
 <section class="soft"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Products</p><h2>Two product lines. Every size, class and grade.</h2><p>Buttweld fittings seamless to 24″ and welded to 72″. Forged flanges from ½″ to 60″ in Class 150 to 2500.</p></div>
   <div class="families">
@@ -279,7 +283,7 @@ def build_home():
    <article class="family reveal"><div class="photo"><img src="/assets/img/flange-range.jpg" alt="Black forged flanges in four sizes" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">½″ to 60″ · Class 150–2500</span><h3>Forged flanges</h3><p>Weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ and long weld neck – ASME B16.5 and B16.47.</p><a class="btn btn-blue" href="/flanges/">Explore flanges</a></div></article>
   </div></div></section>
 
-<section class="content alt"><div class="wrap"><h2 class="h2 reveal">Popular products</h2><div class="lcards reveal">{fit_cards}</div><div class="lcards reveal" style="margin-top:16px">{fl_cards}</div></div></section>
+<section class="content alt"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Popular products</p><h2>Start with the most requested.</h2></div><div class="lcards reveal">{fit_cards}</div><div class="lcards reveal" style="margin-top:16px">{fl_cards}</div></div></section>
 
 <section class="tint" id="materials"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Materials</p><h2>Every grade in your piping class.</h2><p>Stainless, duplex, super duplex, carbon, low-temperature, chrome-moly and nickel alloys, for both fittings and flanges.</p></div><div class="grid4">{mats}</div></div></section>
 
@@ -309,7 +313,7 @@ def build_home():
 <section class="fullbleed" aria-label="Partner with us"><img src="/assets/img/flanges-packed-blue.jpg" alt="Forged weld neck flanges packed with blue protective covers" loading="lazy" width="1280" height="961"><div class="wrap"><p class="eyebrow">Request a quote</p><h2><span>Partner</span><span class="ln">with us</span></h2><p class="lede">Send your BOQ and get price, lead time and delivery terms for the USA and Canada within 24 business hours.</p><div class="cta"><a class="btn btn-gold" href="#quote">Send your BOQ</a><a class="btn btn-ghost" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener">WhatsApp your BOQ</a></div></div><span class="cap">Forged weld neck flanges, packed for export</span></section>
 
 <section class="on-dark" id="quote"><div class="wrap quote"><div class="reveal"><p class="eyebrow">Request a quote</p><h2>Have a BOQ ready?</h2><p class="sub">Send it now. Price, lead time and delivery terms within 24 business hours.</p>
-  <ul class="checks"><li>Manufacturer since 2005 – ISO 9001:2015, PED, IBR</li><li>EN 10204 3.1 certificates with every order</li><li>Shipping to the USA and Canada</li></ul>
+  <ul class="checks"><li>ISO 9001:2015 certified · PED 2014/68/EU material manufacturer approval · IBR workshop approval</li><li>EN 10204 3.1 certificates with every order</li><li>Shipping to the USA and Canada</li></ul>
   <div class="contact-list"><div><strong>Email</strong><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a></div><div><strong>WhatsApp</strong><a href="https://wa.me/{PHONE_WA}">+91 93166 31458</a></div><div><strong>Phone</strong><a href="tel:+919372603602">+91 93726 03602</a> · <a href="tel:+912266393943">+91 22 6639 3943</a> / <a href="tel:+912266393944">44</a></div></div></div>
   <div class="reveal">{quote_form("home", "Buttweld fittings and flanges")}</div></div></section>
 </main>
@@ -461,12 +465,12 @@ def build_datasheets():
     cr, cs = crumbs([("Home", "/"), ("Data sheets", "/data-sheets/"), ("Buttweld fittings", None)])
     body = f'''{cr}<main id="main">{ds_hero(d, "Standards, sizes, materials, manufacturing, marking and documents for Neo Impex buttweld fittings and bends.")}
 <section class="content"><div class="wrap prose-wide">{ds_toolbar()}
-<h2 class="h2">1. Scope and standards</h2>{spec_table([("Products", "Elbows (45°, 90°, 180°), tees, reducers, caps, stub ends, crosses, return bends, pipe bends"), ("Standards", "ASME B16.9 · ASME B16.28 · MSS SP-43 · EN 10253 · ASME B16.49 (induction bends)"), ("End preparation", "Bevelled for butt welding (ASME B16.25)"), ("Marking", "MSS SP-25: grade, size, schedule, heat number")])}
+<h2 class="h2">1. Scope and standards</h2>{spec_table([("Products", "Elbows (45°, 90°, 180°), tees, reducers, caps, stub ends, crosses, return bends, pipe bends"), ("Standards", "ASME B16.9 · ASME B16.28 · MSS SP-43 · EN 10253 · ASME B16.49 (induction bends)"), ("End preparation", "Beveled for butt welding (ASME B16.25)"), ("Marking", "MSS SP-25: grade, size, schedule, heat number")])}
 <h2 class="h2" style="margin-top:36px">2. Sizes and wall thickness</h2>{spec_table([("Seamless", "Up to 24″ (NPS)"), ("Welded", "Up to 72″ (NPS)"), ("Wall thickness", "Sch 5S to XXS, or to match your pipe"), ("Bends", "3D, 5D, 10D, induction and piggable to R = 22D, up to 24″")])}
 <h2 class="h2" style="margin-top:36px">3. Materials</h2>{mt(mat_rows_fit)}
 <h2 class="h2" style="margin-top:36px">4. Manufacturing and testing</h2>{spec_table([("Seamless fittings", "Hot-formed from seamless pipe"), ("Welded fittings", "Fabricated from plate; 100% radiography on welded seams"), ("Heat treatment", "As required by the material, for example solution annealing for austenitic stainless steels"), ("Additional tests", "Such as PMI, hydrostatic or impact tests, can be specified in the purchase order")])}
 <h2 class="h2" style="margin-top:36px">5. Documents and delivery</h2>{spec_table([("Certificates", "EN 10204 3.1 mill test certificate with heat numbers"), ("Inspection", "Third-party inspection can be arranged on request"), ("Shipping documents", "Commercial invoice, packing list, bill of lading, certificate of origin"), ("Terms", "FOB, CIF or DAP")])}
-<h2 class="h2" style="margin-top:36px">6. 90° elbow centre-to-end dimensions</h2>
+<h2 class="h2" style="margin-top:36px">6. 90° elbow center-to-end dimensions</h2>
 <div class="tblwrap"><table class="dtable"><thead><tr><th>NPS</th><th>Long radius (in)</th><th>Long radius (mm)</th><th>Short radius (in)</th><th>Short radius (mm)</th></tr></thead><tbody>{"".join(f"<tr><td>{n}</td><td>{lr_in:.2f}</td><td>{lr_mm}</td><td>{nps:.2f}</td><td>{sr_mm}</td></tr>" for n, nps, lr_mm, sr_mm in ELBOW_SIZES for lr_in in [nps * 1.5])}</tbody></table></div>
 <p class="note">Long radius = 1.5 × NPS (ASME B16.9); short radius = 1.0 × NPS (ASME B16.28), NPS 1 and larger. {E(DS_NOTE)}</p>
 <div style="margin-top:40px">{quote_form("ds-fit", "Data sheet / catalogue", compact=True, title="Request a signed data sheet or sample certificate")}</div></div></section></main>'''
@@ -491,12 +495,12 @@ def build_datasheets():
     d = DATASHEETS["pipe-schedule-chart"]; url = "/data-sheets/pipe-schedule-chart/"
     cr, cs = crumbs([("Home", "/"), ("Data sheets", "/data-sheets/"), ("Pipe schedule chart", None)])
     rows = "".join(f"<tr><td>{n}</td><td>{dn}</td><td>{oi}</td><td>{om}</td><td>{a}</td><td>{b}</td><td>{c}</td><td>{dd}</td></tr>" for n, dn, oi, om, a, b, c, dd in PIPE)
-    body = f'''{cr}<main id="main">{ds_hero(d, "Outside diameter and wall thickness for common pipe sizes, plus 90° elbow centre-to-end dimensions.")}
+    body = f'''{cr}<main id="main">{ds_hero(d, "Outside diameter and wall thickness for common pipe sizes, plus 90° elbow center-to-end dimensions.")}
 <section class="content"><div class="wrap prose-wide">{ds_toolbar()}
 <h2 class="h2">Pipe dimensions: Sch 40 and Sch 80</h2>
 <div class="tblwrap"><table class="dtable"><thead><tr><th>NPS (in)</th><th>DN</th><th>OD (in)</th><th>OD (mm)</th><th>Sch 40 wall (in)</th><th>Sch 40 wall (mm)</th><th>Sch 80 wall (in)</th><th>Sch 80 wall (mm)</th></tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">Wall thicknesses for Sch 40 and Sch 80 from ASME B36.10M. Standard (STD) and extra strong (XS) walls equal Sch 40 and Sch 80 up to NPS 10 and differ above that. Stainless steel pipe (Sch 5S, 10S, 40S, 80S) is covered by ASME B36.19M. {E(DS_NOTE)}</p>
-<h2 class="h2" style="margin-top:40px">90° elbow centre-to-end dimensions</h2>
+<h2 class="h2" style="margin-top:40px">90° elbow center-to-end dimensions</h2>
 <div class="tblwrap"><table class="dtable"><thead><tr><th>NPS</th><th>Long radius (in)</th><th>Long radius (mm)</th><th>Short radius (in)</th><th>Short radius (mm)</th></tr></thead><tbody>{"".join(f"<tr><td>{n}</td><td>{nps * 1.5:.2f}</td><td>{lr_mm}</td><td>{nps:.2f}</td><td>{sr_mm}</td></tr>" for n, nps, lr_mm, sr_mm in ELBOW_SIZES)}</tbody></table></div>
 <p class="note">Long radius = 1.5 × NPS (ASME B16.9); short radius = 1.0 × NPS (ASME B16.28), NPS 1 and larger.</p>
 <div style="margin-top:40px">{cta_band("Need a size that is not here?", "Send your list and we quote any size, schedule and class.")}</div></div></section></main>'''
@@ -518,7 +522,7 @@ def build_export():
         ports = "".join(f"<li>{E(p)}</li>" for p in v["ports"])
         body = f'''{cr}<main id="main">{phero(v["h1"], v["lead"], "Export · " + v["name"], ["ASME B16.9 · B16.5", "EN 10204 3.1", "FOB · CIF · DAP"], product="Buttweld fittings and flanges", single=True)}
 <section class="content"><div class="wrap two"><div class="prose reveal">{secs}</div>
- <aside class="side"><div class="panel"><h3>Typical entry ports</h3><ul>{ports}</ul></div><div class="panel"><h3>Our products</h3><ul><li><a href="/buttweld-fittings/">Buttweld fittings</a></li><li><a href="/flanges/">Flanges</a></li><li><a href="/data-sheets/">Data sheets</a></li></ul></div><div class="panel blue"><h3>Request a quote</h3><p>Send your BOQ and delivery location.</p><a class="btn btn-gold" href="/request-a-quote/?product=Buttweld%20fittings%20and%20flanges">Request a quote</a></div></aside></div></section>
+ <aside class="side"><div class="panel"><h3>Typical entry ports</h3><ul>{ports}</ul></div><div class="panel"><h3>Our products</h3><ul><li><a href="/buttweld-fittings/">Buttweld fittings</a></li><li><a href="/flanges/">Flanges</a></li><li><a href="/data-sheets/">Data sheets</a></li><li><a href="/certifications/">Certifications</a></li></ul></div><div class="panel blue"><h3>Request a quote</h3><p>Send your BOQ and delivery location.</p><a class="btn btn-gold" href="/request-a-quote/?product=Buttweld%20fittings%20and%20flanges">Request a quote</a></div></aside></div></section>
 <section class="content alt"><div class="wrap">{fq}</div></section>
 <section class="content"><div class="wrap">{quote_form("exp-" + k, "Buttweld fittings and flanges", title="Quote for " + v["name"], hint="Tell us your delivery location and we reply within 24 business hours.")}</div></section></main>'''
         page(url, v["title"], v["desc"], body, "exp", [cs, fs], kw=v["kw"])
@@ -572,6 +576,62 @@ def build_utility():
 <section class="content"><div class="wrap"><div class="lcards three"><a class="lcard" href="/buttweld-fittings/"><h3>Buttweld fittings</h3><span class="go">View</span></a><a class="lcard" href="/flanges/"><h3>Flanges</h3><span class="go">View</span></a><a class="lcard" href="/request-a-quote/"><h3>Request a quote</h3><span class="go">Open</span></a></div></div></section></main>'''
     page("/404.html", "Page not found | Neo Impex", "The page you wanted could not be found. Browse Neo Impex buttweld fittings and flanges or request a quote for your project.", body, "", [], noindex=True)
 
+
+def cert_thumb(c):
+    if c["img"]:
+        return f'<div class="thumb"><img src="{c["img"]}" alt="{E(c["short"])} certificate" loading="lazy" width="745" height="1053"></div>'
+    return f'<div class="thumb tile"><span>{E(c["number"])}</span></div>'
+
+def certs_cards():
+    out = ""
+    for c in CERTS:
+        out += f'<a class="lcard ccard" href="/certifications/#{c["key"]}">{cert_thumb(c)}<span class="kind">{E(c["kind"])}</span><h3>{E(c["short"])}</h3><p>{E(c["card_line"])}</p><span class="go">Details</span></a>'
+    return f'<div class="lcards">{out}</div>'
+
+COVER = """<div class="tblwrap"><table class="dtable text"><thead><tr><th>Product</th><th>ISO 9001:2015</th><th>PED material manufacturer</th><th>IBR workshop approval</th></tr></thead><tbody>
+<tr><td>Buttweld pipe fittings up to 24″</td><td>In scope</td><td>In scope</td><td>In scope (seamless / ERW, up to 30 mm thickness)</td></tr>
+<tr><td>Welded buttweld fittings above 24″</td><td>In scope</td><td>In scope</td><td>Not listed in scope</td></tr>
+<tr><td>Forged flanges</td><td>In scope</td><td>In scope</td><td>Not listed in scope</td></tr>
+<tr><td>Forged fittings and forgings</td><td>In scope</td><td>In scope</td><td>Not listed in scope</td></tr></tbody></table></div>
+<p class="note">Based on the scope wording printed on each certificate. For a specific item or project, ask us and we will confirm in writing which approvals apply.</p>"""
+
+def build_certifications():
+    cr, cs = crumbs([("Home", "/"), ("Certifications", None)])
+    arts = ""
+    for c in CERTS:
+        rows = [("Issued by", c["issuer"])]
+        if c["extra_issuer"]:
+            rows.append(("Accreditation", c["extra_issuer"]))
+        rows += [("Certificate / reference", c["number"]), ("Scope as written", c["scope"]), ("Validity and dates", c["validity"]), ("What it means", c["meaning"]), ("Verification", c["verify"])]
+        if c["pdf"]:
+            img = f'<a class="certimg" href="{c["pdf"]}" target="_blank" rel="noopener"><img src="{c["img"]}" alt="{E(c["short"])} certificate" loading="lazy" width="745" height="1053"></a>'
+            btn = f'<a class="btn btn-blue" href="{c["pdf"]}" target="_blank" rel="noopener">View certificate (PDF)</a>'
+        else:
+            img = f'<div class="certimg tile"><span>{E(c["number"])}</span><small>{E(c["short"])}</small></div>'
+            btn = '<a class="btn btn-ghost-dark" href="/request-a-quote/?product=Data%20sheet">Request a copy</a>'
+        arts += f'<article class="cert" id="{c["key"]}"><div>{img}</div><div><p class="eyebrow">{E(c["kind"])}</p><h2>{E(c["title"])}</h2>{spec_table(rows)}<p style="margin-top:18px">{btn}</p></div></article>'
+    title = "Certifications | ISO 9001, PED, IBR, Udyam | Neo Impex"
+    desc = "Neo Impex certificates: ISO 9001:2015, PED 2014/68/EU material manufacturer approval, IBR workshop approval and Udyam registration, with scope and validity."
+    body = f'''{cr}<main id="main">{phero("Certifications and Approvals", "The certificates behind our buttweld fittings and flanges, with the exact scope and validity of each. Open any certificate as a PDF.", "Quality", cta=False, single=True)}
+<section class="content"><div class="wrap">{arts}</div></section>
+<section class="content alt"><div class="wrap"><h2 class="h2">What each certificate covers</h2>{COVER}</div></section>
+<section class="content"><div class="wrap">{cta_band("Need a certificate for your project?", "Tell us the item, size and standard and we confirm which approvals and documents apply.")}</div></section></main>'''
+    page("/certifications/", title, desc, body, "co", [cs], kw=("Neo Impex certifications", ["ISO 9001:2015 flanges manufacturer India", "PED material manufacturer approval flanges fittings", "IBR approved pipe fittings manufacturer"]))
+
+def build_about():
+    cr, cs = crumbs([("Home", "/"), ("About us", None)])
+    facts = [("Legal name", "Neo Impex Stainless Pvt. Ltd."), ("Established", "Incorporated April 4, 2005"), ("Enterprise type", "Small manufacturing enterprise (Udyam registered)"),
+             ("Works", "Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India"), ("Office", "709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India"),
+             ("Email", "kartik@neoimpex.com"), ("Phone / WhatsApp", "+91 93166 31458 · +91 93726 03602 · +91 22 6639 3943 / 44")]
+    body = f'''{cr}<main id="main">{phero("About Neo Impex", "We make buttweld fittings and forged flanges at our works in Vadodara, India, and export them to buyers in the USA, Canada and other markets.", "Company", cta=False, single=True)}
+<section class="content"><div class="wrap two"><div class="prose reveal"><h2>What we do</h2><p>Neo Impex Stainless Pvt. Ltd. manufactures buttweld pipe fittings and bends, and forged flanges, in stainless steel, duplex, carbon, alloy and nickel alloys. Fittings are seamless up to 24″ and welded up to 72″. Flanges run from ½″ to 60″ in Class 150 to 2500, depending on size.</p>
+<h2>How we work</h2><p>Forging, forming, bending, machining and testing are done at our works in Vadodara. Every piece is heat traceable and ships with an EN 10204 3.1 certificate. Welded seams are 100% radiographed.</p>
+<h2>Quality and approvals</h2><p>Our quality system is certified to ISO 9001:2015. We hold a PED 2014/68/EU material manufacturer approval and an IBR workshop approval for pipe fittings, and we are registered as a Small manufacturing enterprise on the Udyam portal. <a href="/certifications/">See each certificate and its scope</a>.</p>
+<h2>Markets</h2><p>We supply distributors, fabricators and contractors in the USA and Canada, and have supplied customers in more than 25 countries. See our <a href="/export/usa/">USA</a> and <a href="/export/canada/">Canada</a> pages for documents, ports and delivery terms.</p>
+<h2>Work with us</h2><p>Send your bill of quantities and we reply with price, lead time and terms within 24 business hours. <a href="/request-a-quote/">Request a quote</a>.</p></div>
+<aside class="side"><div class="panel"><h3>Company details</h3>{spec_table(facts)}</div></aside></div></section></main>'''
+    page("/about/", "About Neo Impex | Buttweld Fittings and Flanges Maker", "Neo Impex Stainless Pvt. Ltd. makes buttweld fittings and forged flanges in Vadodara, India, established 2005, and exports to the USA and Canada.", body, "co", [cs], kw=("Neo Impex Stainless Pvt Ltd", ["buttweld fittings manufacturer Vadodara", "flanges manufacturer Gujarat India"]))
+
 # ----------------------------------------------------------------- SEO FILES
 def build_seo_files():
     urls = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u, *_ in PAGES)
@@ -604,7 +664,7 @@ RedirectMatch 404 ^/(tools|\\.git)(/|$)
 def main():
     for d in GENERATED_DIRS:
         shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
-    build_home(); build_hubs(); build_products(); build_materials(); build_datasheets(); build_export(); build_blog(); build_utility()
+    build_home(); build_hubs(); build_products(); build_materials(); build_datasheets(); build_export(); build_blog(); build_certifications(); build_about(); build_utility()
     build_seo_files()
     print(f"{len(PAGES)} indexable pages built")
     for w in WARN: print("WARN", w)
