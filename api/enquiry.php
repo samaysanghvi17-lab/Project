@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 const TO_EMAIL   = 'kartik@neoimpexglobal.com';
-const FROM_EMAIL = 'no-reply@neoimpexglobal.com';
+const FROM_EMAIL = 'sales@neoimpexglobal.com';
 const FROM_NAME  = 'Neo Impex Website';
 const MAX_FILE   = 8 * 1024 * 1024;
 const MAX_PER_HOUR = 6;
