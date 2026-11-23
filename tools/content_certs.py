@@ -48,6 +48,6 @@ CERTS = [
   validity="Udyam registration date: November 5, 2020. Date of incorporation: April 4, 2005. Date of commencement of production or business shown on the registration: April 1, 2010.",
   card_line="Registration UDYAM-GJ-24-0008643",
   meaning="Registration of the enterprise as a Small manufacturing enterprise on the Government of India’s Udyam portal.",
-  verify="The registration can be verified on udyamregistration.gov.in. A copy is available on request.",
-  pdf="", img=""),
+  verify="The registration can be verified on udyamregistration.gov.in. The published copy is page 1 of the certificate with the personal mobile number and email address removed.",
+  pdf="/assets/docs/neo-impex-udyam-registration-certificate.pdf", img="/assets/img/cert-udyam.jpg"),
 ]
