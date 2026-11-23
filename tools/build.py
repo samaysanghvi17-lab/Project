@@ -272,8 +272,7 @@ def build_home():
     mats = "".join(f'<article class="card reveal"><div class="kind">Material</div><h3>{E(MATERIALS[m]["name"])}</h3><p class="std">{E(MATERIALS[m]["short"])}</p><p class="std"><a href="{fmat(m)}">Buttweld fittings</a> · <a href="{flmat(m)}">Flanges</a></p></article>' for m in MATERIALS_ORDER)
     posts = "".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG[-3:][::-1])
     body = f'''<main id="main">
-<div class="hero" id="top">
-  <aside class="hero-panel" aria-label="Contact details"><div class="blk"><div><b>Contacts</b><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></div><div><b>Works</b>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, India</div></div><div><b>Ships to</b>USA · Canada</div></aside>
+<div class="hero nopanel" id="top">
   <div class="hero-main"><p class="topline">Established 2005 · ISO 9001:2015 certified</p>
     <h1><span>Buttweld fittings</span><span class="ln">&amp; flanges,</span><span class="ln">made to ship.</span></h1>
     <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India, with EN 10204 3.1 certificates.</p>
@@ -317,7 +316,7 @@ def build_home():
 
 <section class="on-dark" id="quote"><div class="wrap quote"><div class="reveal"><p class="eyebrow">Request a quote</p><h2>Have a BOQ ready?</h2><p class="sub">Send it now. Price, lead time and delivery terms within 24 business hours.</p>
   <ul class="checks"><li>ISO 9001:2015 certified · PED 2014/68/EU material manufacturer approval · IBR workshop approval</li><li>EN 10204 3.1 certificates with every order</li><li>Shipping to the USA and Canada</li></ul>
-  <div class="contact-list"><div><strong>Email</strong><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a></div><div><strong>WhatsApp</strong><a href="https://wa.me/{PHONE_WA}">+91 93166 31458</a></div></div></div>
+  </div>
   <div class="reveal">{quote_form("home", "Buttweld fittings and flanges")}</div></div></section>
 </main>
 <script src="/assets/js/orbit.js" defer></script>'''
