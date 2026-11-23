@@ -225,9 +225,9 @@ def quote_form(uid, product_default="", compact=False, title="Request a quote", 
 def lcard(href, name, short, svg):
     return f'<a class="lcard" href="{href}"><div class="art">{svg}</div><h3>{E(name)}</h3><p>{E(short)}</p><span class="go">View</span></a>'
 
-def page(url, title, desc, body, active="", schemas=(), kw=None, image=OG, noindex=False):
+def page(url, title, desc, body, active="", schemas=(), kw=None, image=OG, noindex=False, theme=""):
     check(url, title, desc)
-    out = head(title, desc, url, schemas, image, noindex) + f"\n<body>\n{header(active)}\n{body}\n{footer()}\n</body>\n</html>\n"
+    out = head(title, desc, url, schemas, image, noindex) + f"\n<body{(' class=\"' + theme + '\"') if theme else ''}>\n{header(active)}\n{body}\n{footer()}\n</body>\n</html>\n"
     write(url, out)
     if not noindex and url != "/404.html":
         PAGES.append((url, title, desc, kw[0] if kw else "", "; ".join(kw[1]) if kw else ""))
@@ -572,7 +572,7 @@ def build_contact():
  <div class="panel"><h3>Works and registered address</h3><p class="note" style="margin:0">Neo Impex Stainless Pvt. Ltd.<br>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India</p></div>
  <div class="panel"><h3>Mumbai office</h3><p class="note" style="margin:0">709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India</p></div></aside></div></section></main>'''
     cp = {"@context": "https://schema.org", "@type": "ContactPage", "url": SITE + "/contact/", "name": "Contact Neo Impex", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": ORG_ID}}
-    page("/contact/", "Contact Neo Impex | Buttweld Fittings and Flanges", "Contact Neo Impex Stainless Pvt. Ltd. in Vadodara, India: email, WhatsApp, phone and addresses. We reply to quote requests within 24 business hours.", body, "co", [cs, cp], kw=("Neo Impex contact", ["buttweld fittings supplier contact", "flanges exporter India contact"]))
+    page("/contact/", "Contact Neo Impex | Buttweld Fittings and Flanges", "Contact Neo Impex Stainless Pvt. Ltd. in Vadodara, India: email, WhatsApp, phone and addresses. We reply to quote requests within 24 business hours.", body, "co", [cs, cp], kw=("Neo Impex contact", ["buttweld fittings supplier contact", "flanges exporter India contact"]), theme="theme-red")
 
 def build_utility():
     cr, cs = crumbs([("Home", "/"), ("Request a quote", None)])
