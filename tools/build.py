@@ -240,18 +240,18 @@ def phero(h1, lede, eyebrow, chips=(), visual="", cta=True, product="", single=F
     vis = f'<div class="pvisual{" art" if "<svg" in visual else ""}">{visual}</div>' if visual else ""
     return f'''<section class="phero{" single" if single or not visual else ""}"><div class="wrap"><div><p class="eyebrow gold">{E(eyebrow)}</p><h1>{E(h1)}</h1><p class="lede">{E(lede)}</p>{ch}{c}</div>{vis}</div></section>'''
 
-def photo(name, alt, w=720, h=720):
+def photo(name, alt, w=1280, h=850):
     return f'<img src="/assets/img/{name}" alt="{E(alt)}" width="{w}" height="{h}">'
 
 def spec_table(rows):
     return '<div class="tblwrap"><table class="spectbl"><tbody>' + "".join(f"<tr><th scope='row'>{E(k)}</th><td>{E(v)}</td></tr>" for k, v in rows) + "</tbody></table></div>"
 
 # photo overrides: product slug -> (file, alt)
-FIT_PHOTO = {"elbows": ("elbows-90-pair.jpg", "Two buttweld 90 degree elbows"), "tees": ("tees.jpg", "Polished stainless steel buttweld tees in five sizes"),
-             "reducers": ("reducer-ecc.jpg", "Eccentric buttweld reducer marked ASTM A403"), "caps": ("cap.jpg", "Stainless steel buttweld pipe end cap"),
-             "stub-ends": ("stub-end.jpg", "Long pattern stainless steel stub end"), "return-bends": ("return-bend.jpg", "180 degree stainless steel return bend")}
-FL_PHOTO = {"weld-neck": ("weld-neck.jpg", "Black forged weld neck flange"), "slip-on": ("slip-on.jpg", "Black forged slip-on flange"),
-            "blind": ("blind.jpg", "Black forged blind flange"), "threaded": ("threaded.jpg", "Stainless steel threaded flange with four bolt holes")}
+FIT_PHOTO = {"elbows": ("elbows-90-pair.jpg", "Two buttweld 90 degree elbows"), "tees": ("tees-full.jpg", "Polished stainless steel buttweld tees in five sizes"),
+             "reducers": ("stainless-fittings-group.jpg", "Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap"), "caps": ("stainless-fittings-group.jpg", "Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap"),
+             "stub-ends": ("stainless-fittings-group.jpg", "Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap"), "return-bends": ("stainless-fittings-group.jpg", "Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap")}
+FL_PHOTO = {"weld-neck": ("weld-neck-ss.jpg", "Stainless steel weld neck flange"), "slip-on": ("flange-range.jpg", "Black forged flanges: weld neck, slip-on, blind and a large flange"),
+            "blind": ("flange-range.jpg", "Black forged flanges: weld neck, slip-on, blind and a large flange"), "threaded": ("threaded-full.jpg", "Stainless steel threaded flange with four bolt holes")}
 FIT_ART = {"elbows": "elbow", "tees": "tee", "reducers": "reducer", "caps": "cap", "stub-ends": "stub", "crosses": "cross", "return-bends": "return", "pipe-bends": "bend"}
 FL_ART = {"weld-neck": "weldneck", "slip-on": "slipon", "blind": "blind", "socket-weld": "socket", "threaded": "threaded", "lap-joint": "lap", "ring-type-joint": "rtj", "long-weld-neck": "lwn"}
 

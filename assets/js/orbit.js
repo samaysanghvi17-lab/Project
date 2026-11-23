@@ -2,13 +2,13 @@
   'use strict';
   var stage = document.getElementById('stage'); if (!stage) return;
   var PRODUCTS = [
-    { img: 'weld-neck', tag: 'Flanges', title: 'Weld neck flanges', text: 'WNRF and RTJ for high-pressure and critical service.', alt: 'Black forged weld neck flange', url: '/flanges/weld-neck/', prod: 'Flanges' },
-    { img: 'threaded', tag: 'Flanges', title: 'Threaded flanges', text: 'NPT screwed flanges where welding isn’t allowed – shown in stainless.', alt: 'Stainless steel threaded flange with four bolt holes', url: '/flanges/threaded/', prod: 'Flanges' },
-    { img: 'slip-on', tag: 'Flanges', title: 'Slip-on flanges', text: 'SORF for low-pressure lines where cost and fit-up matter.', alt: 'Black forged slip-on flange', url: '/flanges/slip-on/', prod: 'Flanges' },
-    { img: 'tees', tag: 'Buttweld fittings', title: 'Buttweld tees', text: 'Equal and reducing tees for branch lines – seamless to 24″, welded to 72″.', alt: 'Polished stainless steel buttweld tees', url: '/buttweld-fittings/tees/', prod: 'Buttweld fittings' },
-    { img: 'blind', tag: 'Flanges', title: 'Blind flanges', text: 'Close pipe ends, valves and vessel nozzles.', alt: 'Black forged blind flange', url: '/flanges/blind/', prod: 'Flanges' },
-    { img: 'b1647', tag: 'Flanges', title: 'Large-diameter flanges', text: 'ASME B16.47 for NPS 26 to 60 – packed for export.', alt: 'Large-diameter flanges stacked in the warehouse', url: '/flanges/', prod: 'Flanges' },
-    { img: 'large-flange', tag: 'Flanges', title: 'Forged to 60″ and Class 2500', text: 'Every type, up to 60″ – in stainless, duplex, carbon, alloy and nickel alloys.', alt: 'Large black forged flange', url: '/flanges/', prod: 'Flanges' }
+    { img: 'weld-neck-ss', tag: 'Flanges', title: 'Weld neck flanges', text: 'WNRF and RTJ for high-pressure and critical service.', alt: 'Stainless steel weld neck flange', url: '/flanges/weld-neck/', prod: 'Flanges' },
+    { img: 'tees-full', tag: 'Buttweld fittings', title: 'Buttweld tees', text: 'Equal and reducing tees for branch lines \u2013 seamless to 24\u2033, welded to 72\u2033.', alt: 'Polished stainless steel buttweld tees in five sizes', url: '/buttweld-fittings/tees/', prod: 'Buttweld fittings' },
+    { img: 'flange-range', tag: 'Flanges', title: 'Forged flanges', text: 'Weld neck, slip-on and blind flanges from \u00bd\u2033 to 60\u2033, Class 150 to 2500.', alt: 'Black forged flanges: weld neck, slip-on, blind and a large flange', url: '/flanges/', prod: 'Flanges' },
+    { img: 'elbows-90-pair', tag: 'Buttweld fittings', title: 'Buttweld elbows', text: '45\u00b0, 90\u00b0 and 180\u00b0, long and short radius, to ASME B16.9.', alt: 'Two buttweld 90 degree elbows', url: '/buttweld-fittings/elbows/', prod: 'Buttweld fittings' },
+    { img: 'threaded-full', tag: 'Flanges', title: 'Threaded flanges', text: 'NPT screwed flanges where welding isn\u2019t allowed \u2013 shown in stainless.', alt: 'Stainless steel threaded flange with four bolt holes', url: '/flanges/threaded/', prod: 'Flanges' },
+    { img: 'stainless-fittings-group', tag: 'Buttweld fittings', title: 'Buttweld fittings range', text: 'Reducers, return bends, tees, stub ends, elbows and caps in stainless steel.', alt: 'Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap', url: '/buttweld-fittings/', prod: 'Buttweld fittings' },
+    { img: 'flanges-packed-blue', tag: 'Flanges', title: 'Packed for export', text: 'Forged weld neck flanges with protective covers, ready for shipping.', alt: 'Forged weld neck flanges packed with blue protective covers', url: '/flanges/', prod: 'Flanges' }
   ];
   var dotsEl = document.getElementById('dots');
   var n = PRODUCTS.length, step = 360 / n, rot = 0, vel = 0, dragging = false, moved = 0, lastX = 0, lastT = 0, idleUntil = 0, anim = null, active = -1, visible = true, hoverPause = false;
@@ -19,7 +19,7 @@
   PRODUCTS.forEach(function (p, i) {
     var b = document.createElement('button'); b.type = 'button'; b.className = 'orb-card'; b.setAttribute('aria-label', p.title);
     b.innerHTML = '<span class="frame"><img alt="" draggable="false"></span>';
-    var im = b.querySelector('img'); im.src = '/assets/img/' + p.img + '.jpg'; im.alt = p.alt; im.width = 640; im.height = 640;
+    var im = b.querySelector('img'); im.src = '/assets/img/' + p.img + '.jpg'; im.alt = p.alt; im.width = 1280; im.height = 850;
     if (i > 1) im.loading = 'lazy';
     var pic = document.createElement('picture');
     ['avif', 'webp'].forEach(function (t) { var so = document.createElement('source'); so.type = 'image/' + t; so.srcset = '/assets/img/' + p.img + '.' + t; pic.appendChild(so); });
@@ -33,7 +33,7 @@
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   function norm(a) { a = a % 360; return a < 0 ? a + 360 : a; }
   function layout() {
-    var W = stage.clientWidth, cs = clamp(W * .27, 150, 280), Rx = Math.min(W * .37, 480), Ry = cs * .17, best = -1, bestC = -2;
+    var W = stage.clientWidth, cs = clamp(W * .26, 150, 300), Rx = Math.min(W * .40, 560), Ry = cs * .1, best = -1, bestC = -2;
     stage.style.setProperty('--cs', cs + 'px');
     for (var i = 0; i < n; i++) {
       var a = (i * step - rot) * Math.PI / 180, s = Math.sin(a), c = Math.cos(a), depth = (c + 1) / 2;
