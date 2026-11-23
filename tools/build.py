@@ -273,12 +273,13 @@ def build_home():
     posts = "".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG[-3:][::-1])
     body = f'''<main id="main">
 <div class="hero nopanel" id="top">
+  <div class="hero-photo"><img src="/assets/img/factory-elbows-stock.jpg" alt="Carbon steel buttweld elbows stacked at the Neo Impex works" width="960" height="1280" fetchpriority="high"></div>
   <div class="hero-main"><p class="topline">Established 2005 · ISO 9001:2015 certified</p>
     <h1><span>Buttweld fittings</span><span class="ln">&amp; flanges,</span><span class="ln">made to ship.</span></h1>
     <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India, with EN 10204 3.1 certificates.</p>
     <div class="cta"><a class="btn btn-gold" href="/request-a-quote/">Get a quote in 24 hours</a></div></div>
 </div>
-<section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Product range</p><h2>Our range ↳ in motion</h2></div></div>
+<section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Product range</p><h2>What we make</h2></div></div>
   <div class="orbit" role="region" aria-roledescription="carousel" aria-label="Neo Impex product range">
     <div class="orbit-stage" id="stage"><div class="orbit-ring" aria-hidden="true"><svg viewBox="0 0 1000 230" preserveAspectRatio="none"><ellipse cx="500" cy="115" rx="498" ry="113" fill="none" stroke="#f1dec0" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/></svg></div>
       <div class="orbit-glow" aria-hidden="true"></div><img class="orbit-mark" src="/assets/img/mark-white.png" alt="" aria-hidden="true" width="220" height="168"></div>
@@ -291,13 +292,13 @@ def build_home():
   <div class="stats reveal"><div><strong>2005</strong><span>Year established</span></div><div><strong>25+</strong><span>Countries supplied</span></div><div><strong>72″</strong><span>Largest welded fitting</span></div><div><strong>60″</strong><span>Largest forged flange</span></div></div></div></section>
 <div class="supplied"><div class="wrap"><span class="lbl">Standards we make to</span><ul><li>ASME B16.9</li><li>ASME B16.5</li><li>ASME B16.47</li><li>MSS SP-43</li><li>MSS SP-25</li><li>EN 10204 3.1</li><li>NACE MR0175</li></ul></div></div>
 
-<section class="certs"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Certifications</p><h2>Certified and approved.</h2><p>ISO 9001:2015, PED 2014/68/EU material manufacturer approval, IBR workshop approval and Udyam registration. Each page shows the exact scope and validity.</p></div><div class="reveal">{certs_cards()}</div><p class="note"><a href="/certifications/">See every certificate and what each one covers →</a></p></div></section>
-
 <section class="soft"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Products</p><h2>Two product lines. Every size, class and grade.</h2><p>Buttweld fittings seamless to 24″ and welded to 72″. Forged flanges from ½″ to 60″ in Class 150 to 2500.</p></div>
   <div class="families">
    <article class="family reveal"><div class="photo"><img src="/assets/img/stainless-fittings-group.jpg" alt="Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">Seamless to 24″ · welded to 72″</span><h3>Buttweld fittings &amp; bends</h3><p>Elbows, tees, reducers, caps, stub ends, crosses, return bends, and 3D/5D/10D and piggable bends.</p><a class="btn btn-blue" href="/buttweld-fittings/">Explore buttweld fittings</a></div></article>
    <article class="family reveal"><div class="photo"><img src="/assets/img/flange-range.jpg" alt="Black forged flanges in four sizes" loading="lazy" width="1280" height="850"></div><div class="body"><span class="spec">½″ to 60″ · Class 150–2500</span><h3>Forged flanges</h3><p>Weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ and long weld neck – ASME B16.5 and B16.47.</p><a class="btn btn-blue" href="/flanges/">Explore flanges</a></div></article>
   </div></div></section>
+
+<section class="certs"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Certifications</p><h2>Certified and approved.</h2><p>ISO 9001:2015, PED 2014/68/EU material manufacturer approval, IBR workshop approval and Udyam registration. Each page shows the exact scope and validity.</p></div><div class="reveal">{certs_cards()}</div><p class="note"><a href="/certifications/">See every certificate and what each one covers →</a></p></div></section>
 
 <section class="tint" id="materials"><div class="wrap"><div class="sec-head reveal"><p class="eyebrow">Materials</p><h2>Every grade in your piping class.</h2><p>Stainless, duplex, super duplex, carbon, low-temperature, chrome-moly and nickel alloys, for both fittings and flanges.</p></div><div class="grid4">{mats}</div></div></section>
 
@@ -566,7 +567,7 @@ def build_blog():
 def build_contact():
     cr, cs = crumbs([("Home", "/"), ("Contact", None)])
     body = f'''{cr}<main id="main">{phero("Contact Neo Impex", "Send a bill of quantities or a question. We reply within 24 business hours. WhatsApp is the fastest way to reach us.", "Contact", cta=False, single=True)}
-<section class="content"><div class="wrap two"><div>{quote_form("ct", "", title="Send us a message", heading_tag="h2", hint="Tell us what you need and where it ships. We reply within 24 business hours.")}</div>
+<section class="content"><div class="wrap two contactgrid"><div>{quote_form("ct", "", title="Send us a message", heading_tag="h2", hint="Tell us what you need and where it ships. We reply within 24 business hours.")}</div>
  <aside class="side"><div class="panel"><h3>Email and WhatsApp</h3><ul><li><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a></li><li><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></li></ul></div>
  <div class="panel"><h3>Works and registered address</h3><p class="note" style="margin:0">Neo Impex Stainless Pvt. Ltd.<br>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India</p></div>
  <div class="panel"><h3>Mumbai office</h3><p class="note" style="margin:0">709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India</p></div></aside></div></section></main>'''
