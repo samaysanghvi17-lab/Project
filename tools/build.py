@@ -123,7 +123,7 @@ def footer():
       <span><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a><br><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></span></address></div>
     <div><p class="fh">Products</p><ul><li><a href="/buttweld-fittings/">Buttweld fittings</a></li><li><a href="/flanges/">Flanges</a></li><li><a href="/buttweld-fittings/#materials">Fittings by material</a></li><li><a href="/flanges/#materials">Flanges by material</a></li><li><a href="/data-sheets/">Data sheets</a></li></ul></div>
     <div><p class="fh">Export</p><ul><li><a href="/export/usa/">USA</a></li><li><a href="/export/canada/">Canada</a></li><li><a href="/request-a-quote/">Request a quote</a></li></ul></div>
-    <div><p class="fh">Company</p><ul><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/contact/">Contact</a></li><li><a href="/blog/">Blog</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
+    <div><p class="fh">Company</p><ul><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/contact/">Contact</a></li><li><a href="/blog/">Blog</a></li><li><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
   </div>
   <div class="legal"><span>\u00a9 2026 Neo Impex Stainless Pvt. Ltd. \u00b7 neoimpexglobal.com</span><span>Established 2005 \u00b7 Vadodara, India</span></div>
 </div></footer>
@@ -136,7 +136,8 @@ def footer():
 ORG_ID = SITE + "/#organization"
 # The single number shown on every page; the schema below lists exactly the same one.
 PHONES = [("+91-93166-31458", "WhatsApp / sales")]
-SAMEAS = []      # add real profile URLs here (LinkedIn company page, IndiaMART, etc.); omitted from schema while empty
+LINKEDIN = "https://www.linkedin.com/company/neo-impex-stainless-pvt-ltd/"
+SAMEAS = [LINKEDIN]      # real profile URLs; add more (IndiaMART, etc.) here
 AUTHOR = {"name": "", "jobTitle": "", "url": ""}   # set a real person to credit blog posts; falls back to the company while empty
 
 ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": ORG_ID, "name": "Neo Impex Stainless Pvt. Ltd.", "alternateName": "Neo Impex", "url": SITE + "/",
@@ -666,7 +667,7 @@ def build_seo_files():
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
     groups = [("Products", ("/buttweld-fittings/", "/flanges/")), ("Company", ("/about/", "/certifications/", "/contact/", "/request-a-quote/")), ("Export", ("/export/",)), ("Resources", ("/data-sheets/", "/blog/"))]
     lines = ["# Neo Impex Stainless Pvt. Ltd.", "", "> Manufacturer and exporter of ASME buttweld pipe fittings (seamless to 24 inch, welded to 72 inch) and forged flanges (1/2 inch to 60 inch, Class 150 to 2500) from Vadodara, India. Established 2005. Supplies distributors, fabricators and contractors in the USA and Canada with EN 10204 3.1 certificates.", ""]
-    lines += ["Contact: kartik@neoimpexglobal.com, WhatsApp +91 93166 31458. Quote reply within 24 business hours.", ""]
+    lines += ["Contact: kartik@neoimpexglobal.com, WhatsApp +91 93166 31458. Quote reply within 24 business hours.", f"LinkedIn: {LINKEDIN}", ""]
     for g, prefixes in groups:
         lines.append("## " + g)
         for u, t, d, *_ in PAGES:
