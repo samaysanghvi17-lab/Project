@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Static site builder for neoimpexglobal.com.  Run from the repository root:  python3 tools/build.py"""
-import csv, html, json, os, shutil, sys
+import csv, html, json, os, re, shutil, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from content_products import FITTINGS, FITTINGS_ORDER, FLANGES, FLANGES_ORDER
 from content_materials import MATERIALS, MATERIALS_ORDER
@@ -14,7 +14,7 @@ OG = SITE + "/assets/img/og-image.jpg"
 PHONE_WA = "919316631458"
 E = html.escape
 
-GENERATED_DIRS = ["buttweld-fittings", "flanges", "data-sheets", "export", "blog", "request-a-quote", "privacy-policy", "certifications", "about"]
+GENERATED_DIRS = ["buttweld-fittings", "flanges", "data-sheets", "export", "blog", "request-a-quote", "privacy-policy", "certifications", "about", "contact"]
 PAGES = []      # (url, title, description, primary keyword, secondary keywords)
 WARN = []
 
@@ -22,7 +22,16 @@ WARN = []
 def jd(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + "</script>"
 
+PIC_SKIP = {"favicon", "apple-touch-icon", "og-image"}
+def picturize(html_text):
+    def sub(m):
+        tag, stem, ext = m.group(0), m.group(1), m.group(2)
+        if stem in PIC_SKIP: return tag
+        return (f'<picture><source type="image/avif" srcset="/assets/img/{stem}.avif"><source type="image/webp" srcset="/assets/img/{stem}.webp">{tag}</picture>')
+    return re.sub(r'<img [^>]*src="/assets/img/([\w-]+)\.(jpg|png)"[^>]*>', sub, html_text)
+
 def write(url, content):
+    content = picturize(content)
     path = os.path.join(ROOT, url.strip("/"), "index.html") if url != "/" else os.path.join(ROOT, "index.html")
     if url == "/404.html":
         path = os.path.join(ROOT, "404.html")
@@ -31,8 +40,8 @@ def write(url, content):
         f.write(content)
 
 def check(url, title, desc):
-    if len(title) > 68: WARN.append(f"title {len(title)} chars: {url}")
-    if not (70 <= len(desc) <= 165): WARN.append(f"description {len(desc)} chars: {url}")
+    if len(title) > 65: WARN.append(f"title {len(title)} chars: {url}")
+    if not (70 <= len(desc) <= 155): WARN.append(f"description {len(desc)} chars: {url}")
 
 LOGO = '<img src="/assets/img/logo-light.png" alt="Neo Impex \u2013 Connecting Pipeline" width="128" height="38">'
 LOGO_L = '<img src="/assets/img/logo-light.png" alt="Neo Impex – Connecting Pipeline" width="196" height="58" loading="lazy">'
@@ -93,7 +102,7 @@ def nav_html(active):
       <div class="has-sub">{a("/flanges/", "Flanges", "fl")}<button class="subtoggle" type="button" aria-label="Show Flanges menu" aria-expanded="false"></button><div class="sub"><span class="grp">Types</span>{fl}<hr><a href="/flanges/#materials">By material →</a></div></div>
       <div class="has-sub">{a("/export/", "Export", "exp")}<button class="subtoggle" type="button" aria-label="Show Export menu" aria-expanded="false"></button><div class="sub"><a href="/export/usa/">USA</a><a href="/export/canada/">Canada</a></div></div>
       <div class="has-sub">{a("/data-sheets/", "Resources", "res")}<button class="subtoggle" type="button" aria-label="Show Resources menu" aria-expanded="false"></button><div class="sub"><a href="/data-sheets/">Data sheets</a><a href="/data-sheets/pipe-schedule-chart/">Pipe schedule chart</a><a href="/blog/">Blog</a></div></div>
-      <div class="has-sub">{a("/about/", "Company", "co")}<button class="subtoggle" type="button" aria-label="Show Company menu" aria-expanded="false"></button><div class="sub"><a href="/about/">About us</a><a href="/certifications/">Certifications</a><a href="/request-a-quote/">Contact</a></div></div>
+      <div class="has-sub">{a("/about/", "Company", "co")}<button class="subtoggle" type="button" aria-label="Show Company menu" aria-expanded="false"></button><div class="sub"><a href="/about/">About us</a><a href="/certifications/">Certifications</a><a href="/contact/">Contact</a></div></div>
     </nav>'''
 
 def header(active):
@@ -111,10 +120,10 @@ def footer():
     <div>{LOGO_L}<address><span><strong style="color:#fff">Neo Impex Stainless Pvt. Ltd.</strong></span>
       <span>Works: Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India</span>
       <span>Office: 709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India</span>
-      <span><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><br><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><br><a href="tel:+919372603602">+91 93726 03602</a> \u00b7 <a href="tel:+912266393943">+91 22 6639 3943</a> / <a href="tel:+912266393944">44</a></span></address></div>
+      <span><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a><br><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></span></address></div>
     <div><p class="fh">Products</p><ul><li><a href="/buttweld-fittings/">Buttweld fittings</a></li><li><a href="/flanges/">Flanges</a></li><li><a href="/buttweld-fittings/#materials">Fittings by material</a></li><li><a href="/flanges/#materials">Flanges by material</a></li><li><a href="/data-sheets/">Data sheets</a></li></ul></div>
     <div><p class="fh">Export</p><ul><li><a href="/export/usa/">USA</a></li><li><a href="/export/canada/">Canada</a></li><li><a href="/request-a-quote/">Request a quote</a></li></ul></div>
-    <div><p class="fh">Company</p><ul><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/blog/">Blog</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
+    <div><p class="fh">Company</p><ul><li><a href="/about/">About us</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/contact/">Contact</a></li><li><a href="/blog/">Blog</a></li><li><a href="/privacy-policy/">Privacy policy</a></li></ul></div>
   </div>
   <div class="legal"><span>\u00a9 2026 Neo Impex Stainless Pvt. Ltd. \u00b7 neoimpexglobal.com</span><span>Established 2005 \u00b7 Vadodara, India</span></div>
 </div></footer>
@@ -124,10 +133,19 @@ def footer():
 </aside>
 <script src="/assets/js/config.js"></script><script src="/assets/js/site.js" defer></script>'''
 
-ORG = {"@context": "https://schema.org", "@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd.", "url": SITE + "/",
-       "logo": SITE + "/assets/img/logo.png", "foundingDate": "2005", "legalName": "Neo Impex Stainless Pvt. Ltd.",
-       "email": "kartik@neoimpex.com", "telephone": "+91 93166 31458",
-       "address": {"@type": "PostalAddress", "streetAddress": "Plot No. C1/B-270, GIDC Por, Ramangamdi", "addressLocality": "Vadodara", "postalCode": "391243", "addressRegion": "Gujarat", "addressCountry": "IN"}}
+ORG_ID = SITE + "/#organization"
+# The single number shown on every page; the schema below lists exactly the same one.
+PHONES = [("+91-93166-31458", "WhatsApp / sales")]
+SAMEAS = []      # add real profile URLs here (LinkedIn company page, IndiaMART, etc.); omitted from schema while empty
+AUTHOR = {"name": "", "jobTitle": "", "url": ""}   # set a real person to credit blog posts; falls back to the company while empty
+
+ORG = {"@context": "https://schema.org", "@type": "Organization", "@id": ORG_ID, "name": "Neo Impex Stainless Pvt. Ltd.", "alternateName": "Neo Impex", "url": SITE + "/",
+       "logo": SITE + "/assets/img/logo.png", "image": SITE + "/assets/img/works-vadodara.jpg", "foundingDate": "2005-04-04", "legalName": "Neo Impex Stainless Pvt. Ltd.",
+       "email": "kartik@neoimpexglobal.com",
+       "address": {"@type": "PostalAddress", "streetAddress": "Plot No. C1/B-270, GIDC Por, Ramangamdi", "addressLocality": "Vadodara", "postalCode": "391243", "addressRegion": "Gujarat", "addressCountry": "IN"},
+       "contactPoint": [{"@type": "ContactPoint", "contactType": "sales", "telephone": ph, "name": label, "email": "kartik@neoimpexglobal.com", "areaServed": ["US", "CA"], "availableLanguage": ["English"]} for ph, label in PHONES]}
+if SAMEAS: ORG["sameAs"] = SAMEAS
+WEBSITE = {"@context": "https://schema.org", "@type": "WebSite", "@id": SITE + "/#website", "url": SITE + "/", "name": "Neo Impex", "inLanguage": "en-US", "publisher": {"@id": ORG_ID}}
 
 def head(title, desc, url, schemas=(), image=OG, noindex=False, extra_css=""):
     robots = "noindex,follow" if noindex else "index,follow,max-image-preview:large"
@@ -142,7 +160,7 @@ def head(title, desc, url, schemas=(), image=OG, noindex=False, extra_css=""):
 <meta name="robots" content="{robots}">
 <meta name="theme-color" content="#0a0b0e">
 <link rel="canonical" href="{canon}">
-<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/assets/img/favicon.png">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Neo Impex"><meta property="og:locale" content="en_US">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{image}">
@@ -201,7 +219,7 @@ def quote_form(uid, product_default="", compact=False, title="Request a quote", 
       <div class="actions"><button class="btn btn-blue" type="submit">Send enquiry</button><button class="btn btn-ghost-dark" type="button" data-wa>Send on WhatsApp</button></div>
       <p class="note">We use your details only to reply to this enquiry. See our <a href="/privacy-policy/">privacy policy</a>.</p>
       <p class="status" role="status" hidden></p>
-      <noscript><p class="note">JavaScript is needed to send this form. Please email kartik@neoimpex.com instead.</p></noscript>
+      <noscript><p class="note">JavaScript is needed to send this form. Please email kartik@neoimpexglobal.com instead.</p></noscript>
     </form>'''
 
 def lcard(href, name, short, svg):
@@ -255,7 +273,7 @@ def build_home():
     posts = "".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG[-3:][::-1])
     body = f'''<main id="main">
 <div class="hero" id="top">
-  <aside class="hero-panel" aria-label="Contact details"><div class="blk"><div><b>Contacts</b><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a><a href="tel:+919372603602">+91 93726 03602</a></div><div><b>Works</b>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, India</div></div><div><b>Ships to</b>USA · Canada</div></aside>
+  <aside class="hero-panel" aria-label="Contact details"><div class="blk"><div><b>Contacts</b><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></div><div><b>Works</b>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, India</div></div><div><b>Ships to</b>USA · Canada</div></aside>
   <div class="hero-main"><p class="topline">Established 2005 · ISO 9001:2015 certified</p>
     <h1><span>Buttweld fittings</span><span class="ln">&amp; flanges,</span><span class="ln">made to ship.</span></h1>
     <p class="lede">ASME B16.9 buttweld fittings and ASME B16.5 / B16.47 flanges for US and Canadian distributors, fabricators and contractors. Made in Vadodara, India, with EN 10204 3.1 certificates.</p>
@@ -299,11 +317,11 @@ def build_home():
 
 <section class="on-dark" id="quote"><div class="wrap quote"><div class="reveal"><p class="eyebrow">Request a quote</p><h2>Have a BOQ ready?</h2><p class="sub">Send it now. Price, lead time and delivery terms within 24 business hours.</p>
   <ul class="checks"><li>ISO 9001:2015 certified · PED 2014/68/EU material manufacturer approval · IBR workshop approval</li><li>EN 10204 3.1 certificates with every order</li><li>Shipping to the USA and Canada</li></ul>
-  <div class="contact-list"><div><strong>Email</strong><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a></div><div><strong>WhatsApp</strong><a href="https://wa.me/{PHONE_WA}">+91 93166 31458</a></div><div><strong>Phone</strong><a href="tel:+919372603602">+91 93726 03602</a> · <a href="tel:+912266393943">+91 22 6639 3943</a> / <a href="tel:+912266393944">44</a></div></div></div>
+  <div class="contact-list"><div><strong>Email</strong><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a></div><div><strong>WhatsApp</strong><a href="https://wa.me/{PHONE_WA}">+91 93166 31458</a></div></div></div>
   <div class="reveal">{quote_form("home", "Buttweld fittings and flanges")}</div></div></section>
 </main>
 <script src="/assets/js/orbit.js" defer></script>'''
-    page("/", title, desc, body, kw=("buttweld fittings and flanges manufacturer", ["ASME B16.9 fittings exporter India", "flanges manufacturer India USA Canada"]))
+    page("/", title, desc, body, schemas=[WEBSITE], kw=("buttweld fittings and flanges manufacturer", ["ASME B16.9 fittings exporter India", "flanges manufacturer India USA Canada"]))
     # the home page uses the /404-safe script order: orbit.js after site.js
 
 # ----------------------------------------------------------------- HUBS
@@ -317,7 +335,7 @@ def build_hubs():
     fq, fs = faq_block(faqs)
     cr, cs = crumbs([("Home", "/"), ("Buttweld fittings", None)])
     title = "Buttweld Fittings Manufacturer & Exporter | USA, Canada"
-    desc = "ASME B16.9 buttweld fittings: elbows, tees, reducers, caps, stub ends, crosses, return bends and bends. Seamless to 24″, welded to 72″. Export to USA and Canada."
+    desc = "ASME B16.9 buttweld fittings: elbows, tees, reducers, caps, stub ends, crosses and bends. Seamless to 24″, welded to 72″. Export to USA and Canada."
     body = f'''{cr}<main id="main">{phero("Buttweld Fittings: Manufacturer and Exporter", "Elbows, tees, reducers, caps, stub ends, crosses, return bends and pipe bends – seamless up to 24″ and welded up to 72″, in stainless, duplex, carbon, alloy and nickel alloys.", "Buttweld fittings", ["ASME B16.9 · B16.28", "MSS SP-43", "Seamless to 24″", "Welded to 72″"], photo("stainless-fittings-group.jpg", "Stainless steel buttweld fittings: reducer, return bend, tee, stub end, elbow and cap", 1280, 850), product="Buttweld fittings")}
 <section class="content"><div class="wrap"><h2 class="h2">Choose a fitting</h2><div class="lcards">{cards}</div></div></section>
 <section class="content alt" id="materials"><div class="wrap"><h2 class="h2">Buttweld fittings by material</h2><div class="lcards">{mcards}</div></div></section>
@@ -337,7 +355,7 @@ def build_hubs():
     fq, fs = faq_block(faqs)
     cr, cs = crumbs([("Home", "/"), ("Flanges", None)])
     title = "Forged Flanges Manufacturer & Exporter | USA, Canada"
-    desc = "ASME B16.5 and B16.47 forged flanges: weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ. ½″ to 60″, Class 150–2500. Export to USA and Canada."
+    desc = "ASME B16.5 and B16.47 forged flanges: weld neck, slip-on, blind, socket weld, threaded, lap joint, RTJ. ½″ to 60″, Class 150–2500. Export to USA, Canada."
     body = f'''{cr}<main id="main">{phero("Forged Flanges: Manufacturer and Exporter", "Every flange type your piping needs – forged, machined and drilled in our Vadodara works, up to 60″ and Class 2500, in stainless, duplex, carbon, alloy and nickel alloys.", "Flanges", ["ASME B16.5 · B16.47", "½″ to 60″", "Class 150–2500"], photo("flange-range.jpg", "Black forged flanges in four sizes", 1280, 850), product="Flanges")}
 <section class="content"><div class="wrap"><h2 class="h2">Choose a flange type</h2><div class="lcards">{cards}</div><p class="note">We also make spectacle blinds and spacers, orifice flanges, reducing flanges and nipoflanges. <a href="/request-a-quote/?product=Flanges">Ask for a quote</a>.</p></div></section>
 <section class="content alt" id="materials"><div class="wrap"><h2 class="h2">Flanges by material</h2><div class="lcards">{mcards}</div></div></section>
@@ -394,7 +412,7 @@ def build_materials():
             nm = m["name"]
             title = f"{nm.split(' (')[0]} {noun.title()} | Manufacturer, USA, Canada"
             if len(title) > 66: title = f"{nm.split(' (')[0]} {noun.title()} Exporter | Neo Impex"
-            desc = f"{nm.split(' (')[0]} {noun}: grades, ASTM specs and uses. Made in India to ASME standards with EN 10204 3.1 certificates. Exported to USA, Canada."
+            desc = f"{nm.split(' (')[0]} {noun}: grades, ASTM specs and uses. Made in India with EN 10204 3.1 certificates. Exported to USA and Canada."
             cr, cs = crumbs([("Home", "/"), (hubname, hub), ("Materials", hub + "#materials"), (nm.split(" (")[0], None)])
             fq, fs = faq_block(faqs)
             rows = "".join(f"<tr><td>{E(a)}</td><td>{E(b)}</td><td>{E(c)}</td></tr>" for a, b, c in spec)
@@ -512,6 +530,18 @@ def build_export():
         page(url, v["title"], v["desc"], body, "exp", [cs, fs], kw=v["kw"])
 
 # ----------------------------------------------------------------- BLOG
+def author_schema():
+    if AUTHOR["name"]:
+        a = {"@type": "Person", "name": AUTHOR["name"], "worksFor": {"@id": ORG_ID}}
+        if AUTHOR["jobTitle"]: a["jobTitle"] = AUTHOR["jobTitle"]
+        if AUTHOR["url"]: a["url"] = AUTHOR["url"]
+        return a
+    return {"@type": "Organization", "@id": ORG_ID, "name": "Neo Impex Stainless Pvt. Ltd."}
+
+def byline(date):
+    who = (f'By {E(AUTHOR["name"])}' + (f', {E(AUTHOR["jobTitle"])}' if AUTHOR["jobTitle"] else "") + ", Neo Impex") if AUTHOR["name"] else "By Neo Impex Stainless Pvt. Ltd."
+    return f'<p class="byline">{who} \u00b7 <time datetime="{date}">Published {date}</time></p>'
+
 def build_blog():
     cr, cs = crumbs([("Home", "/"), ("Blog", None)])
     cards = "".join(f'<a class="bcard" href="/blog/{b["slug"]}/"><time datetime="{b["date"]}">{b["date"]}</time><h3>{E(b["title"])}</h3><p>{E(b["desc"])}</p><span class="go">Read</span></a>' for b in BLOG[::-1])
@@ -526,14 +556,24 @@ def build_blog():
         secs = "".join(f"<h2>{E(h)}</h2>" + "".join(f"<p>{E(t)}</p>" for t in paras) for h, paras in b["body"])
         rel = "".join(f'<li><a href="{u}">{E(t)}</a></li>' for u, t in b["related"])
         art_s = {"@context": "https://schema.org", "@type": "Article", "headline": b["h1"], "description": b["desc"], "datePublished": b["date"], "dateModified": TODAY,
-                 "author": {"@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd."}, "publisher": {"@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd.", "logo": {"@type": "ImageObject", "url": SITE + "/assets/img/logo.png"}},
+                 "author": author_schema(), "publisher": {"@type": "Organization", "name": "Neo Impex Stainless Pvt. Ltd.", "logo": {"@type": "ImageObject", "url": SITE + "/assets/img/logo.png"}},
                  "image": OG, "mainEntityOfPage": SITE + url}
         body = f'''{cr}<main id="main">{phero(b["h1"], b["desc"], "Blog", cta=False, single=True)}
-<section class="content"><div class="wrap two"><article class="prose"><p><strong>{E(b["intro"])}</strong></p>{secs}<p class="note">Published {b["date"]}. General information only, not legal, customs or engineering advice.</p></article>
+<section class="content"><div class="wrap two"><article class="prose">{byline(b["date"])}<p><strong>{E(b["intro"])}</strong></p>{secs}<p class="note">General information only, not legal, customs or engineering advice.</p></article>
  <aside class="side"><div class="panel"><h3>Related</h3><ul>{rel}</ul></div><div class="panel blue"><h3>Request a quote</h3><p>Send your BOQ. Reply within 24 business hours.</p><a class="btn btn-gold" href="/request-a-quote/">Request a quote</a></div></aside></div></section></main>'''
         page(url, b["title"], b["desc"], body, "blog", [cs, art_s], kw=b["kw"])
 
 # ----------------------------------------------------------------- UTILITY PAGES
+def build_contact():
+    cr, cs = crumbs([("Home", "/"), ("Contact", None)])
+    body = f'''{cr}<main id="main">{phero("Contact Neo Impex", "Send a bill of quantities or a question. We reply within 24 business hours. WhatsApp is the fastest way to reach us.", "Contact", cta=False, single=True)}
+<section class="content"><div class="wrap two"><div>{quote_form("ct", "", title="Send us a message", heading_tag="h2", hint="Tell us what you need and where it ships. We reply within 24 business hours.")}</div>
+ <aside class="side"><div class="panel"><h3>Email and WhatsApp</h3><ul><li><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a></li><li><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></li></ul></div>
+ <div class="panel"><h3>Works and registered address</h3><p class="note" style="margin:0">Neo Impex Stainless Pvt. Ltd.<br>Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India</p></div>
+ <div class="panel"><h3>Mumbai office</h3><p class="note" style="margin:0">709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India</p></div></aside></div></section></main>'''
+    cp = {"@context": "https://schema.org", "@type": "ContactPage", "url": SITE + "/contact/", "name": "Contact Neo Impex", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": ORG_ID}}
+    page("/contact/", "Contact Neo Impex | Buttweld Fittings and Flanges", "Contact Neo Impex Stainless Pvt. Ltd. in Vadodara, India: email, WhatsApp, phone and addresses. We reply to quote requests within 24 business hours.", body, "co", [cs, cp], kw=("Neo Impex contact", ["buttweld fittings supplier contact", "flanges exporter India contact"]))
+
 def build_utility():
     cr, cs = crumbs([("Home", "/"), ("Request a quote", None)])
     title = "Request a Quote | Buttweld Fittings and Flanges"
@@ -541,16 +581,17 @@ def build_utility():
     body = f'''{cr}<main id="main">{phero("Request a Quote", "Send your bill of quantities, or a list of sizes, grades and quantities. We reply with price, lead time and delivery terms within 24 business hours.", "Quote", cta=False, single=True)}
 <section class="content"><div class="wrap two"><div>{quote_form("rq", "", title="Your enquiry", heading_tag="h2")}</div>
  <aside class="side"><div class="panel"><h3>What to include</h3><ul><li>Product type and size (NPS)</li><li>Schedule or pressure class</li><li>Material grade and standard</li><li>Quantity</li><li>Delivery port, ZIP or postal code</li><li>Certificates and tests required</li></ul></div>
- <div class="panel"><h3>Prefer to talk?</h3><ul><li><a href="mailto:kartik@neoimpex.com">kartik@neoimpex.com</a></li><li><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></li><li><a href="tel:+919372603602">+91 93726 03602</a></li></ul></div></aside></div></section></main>'''
-    page("/request-a-quote/", title, desc, body, "", [cs], kw=("request a quote buttweld fittings flanges", ["pipe fittings RFQ", "flanges quote USA Canada"]))
+ <div class="panel"><h3>Our works</h3><img class="panelimg" src="/assets/img/works-vadodara.jpg" alt="Front of the Neo Impex building in GIDC Por, Vadodara" width="1280" height="960" loading="lazy"><p class="note" style="margin-top:12px">Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India</p></div>
+ <div class="panel"><h3>Prefer to talk?</h3><ul><li><a href="mailto:kartik@neoimpexglobal.com">kartik@neoimpexglobal.com</a></li><li><a href="https://wa.me/{PHONE_WA}">WhatsApp +91 93166 31458</a></li></ul></div></aside></div></section></main>'''
+    page("/request-a-quote/", title, desc, body, "", [cs, {"@context": "https://schema.org", "@type": "ContactPage", "url": SITE + "/request-a-quote/", "name": "Request a quote", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": ORG_ID}}], kw=("request a quote buttweld fittings flanges", ["pipe fittings RFQ", "flanges quote USA Canada"]))
 
     cr, cs = crumbs([("Home", "/"), ("Privacy policy", None)])
-    pp = [("Who we are", "Neo Impex Stainless Pvt. Ltd. (“Neo Impex”, “we”) operates neoimpexglobal.com. Our works are at Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India. Contact: kartik@neoimpex.com."),
+    pp = [("Who we are", "Neo Impex Stainless Pvt. Ltd. (“Neo Impex”, “we”) operates neoimpexglobal.com. Our works are at Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India. Contact: kartik@neoimpexglobal.com."),
           ("What we collect", "When you send an enquiry we collect the details you enter (name, company, email, phone, country, product details, message and any file you attach) and technical details such as the page you came from, your IP address and browser. If analytics is switched on, we also collect usage data such as pages viewed."),
           ("How we use it", "We use your details to reply to your enquiry, prepare quotes and manage the business relationship. We do not sell your personal information. We may share it with service providers that host our website and email, or with freight and inspection partners when needed to fulfil an order."),
           ("Cookies and analytics", "We may use analytics to understand how the site is used. You can block cookies in your browser settings."),
           ("Retention", "We keep enquiry records for as long as needed for business and legal purposes, then delete them."),
-          ("Your choices", "You can ask us to access, correct or delete your personal information, or to stop contacting you, by emailing kartik@neoimpex.com. Residents of some US states and Canada may have additional rights under local law."),
+          ("Your choices", "You can ask us to access, correct or delete your personal information, or to stop contacting you, by emailing kartik@neoimpexglobal.com. Residents of some US states and Canada may have additional rights under local law."),
           ("Changes", "We may update this policy. The date below shows the latest version. Last updated: 22 November 2026.")]
     body = f'''{cr}<main id="main">{phero("Privacy Policy", "How Neo Impex handles the information you send through this website.", "Legal", cta=False, single=True)}
 <section class="content"><div class="wrap"><div class="prose">{"".join(f"<h2>{E(h)}</h2><p>{E(t)}</p>" for h, t in pp)}</div></div></section></main>'''
@@ -595,7 +636,7 @@ def build_certifications():
             btn = '<a class="btn btn-ghost-dark" href="/request-a-quote/?product=Data%20sheet">Request a copy</a>'
         arts += f'<article class="cert" id="{c["key"]}"><div>{img}</div><div><p class="eyebrow">{E(c["kind"])}</p><h2>{E(c["title"])}</h2>{spec_table(rows)}<p style="margin-top:18px">{btn}</p></div></article>'
     title = "Certifications | ISO 9001, PED, IBR, Udyam | Neo Impex"
-    desc = "Neo Impex certificates: ISO 9001:2015, PED 2014/68/EU material manufacturer approval, IBR workshop approval and Udyam registration, with scope and validity."
+    desc = "Neo Impex certificates: ISO 9001:2015, PED 2014/68/EU material manufacturer approval, IBR workshop approval and Udyam registration, with scope."
     body = f'''{cr}<main id="main">{phero("Certifications and Approvals", "The certificates behind our buttweld fittings and flanges, with the exact scope and validity of each. Open any certificate as a PDF.", "Quality", cta=False, single=True)}
 <section class="content"><div class="wrap">{arts}</div></section>
 <section class="content alt"><div class="wrap"><h2 class="h2">What each certificate covers</h2>{COVER}</div></section>
@@ -606,49 +647,101 @@ def build_about():
     cr, cs = crumbs([("Home", "/"), ("About us", None)])
     facts = [("Legal name", "Neo Impex Stainless Pvt. Ltd."), ("Established", "Incorporated April 4, 2005"), ("Enterprise type", "Small manufacturing enterprise (Udyam registered)"),
              ("Works", "Plot No. C1/B-270, GIDC Por, Ramangamdi, Vadodara 391243, Gujarat, India"), ("Office", "709, Prasad Chamber, Tata Road No. 2, Charni Road (East), Mumbai 400004, India"),
-             ("Email", "kartik@neoimpex.com"), ("Phone / WhatsApp", "+91 93166 31458 · +91 93726 03602 · +91 22 6639 3943 / 44")]
+             ("Email", "kartik@neoimpexglobal.com"), ("WhatsApp / phone", "+91 93166 31458")]
     body = f'''{cr}<main id="main">{phero("About Neo Impex", "We make buttweld fittings and forged flanges at our works in Vadodara, India, and export them to buyers in the USA, Canada and other markets.", "Company", cta=False, single=True)}
+<section class="content" style="padding-bottom:0"><div class="wrap"><figure class="works reveal"><img src="/assets/img/works-vadodara.jpg" alt="Front of the Neo Impex Stainless Pvt. Ltd. building with the Neo Impex sign and entrance gate" width="1280" height="960" loading="lazy"><figcaption>Neo Impex, GIDC Por, Vadodara</figcaption></figure></div></section>
 <section class="content"><div class="wrap two"><div class="prose reveal"><h2>What we do</h2><p>Neo Impex Stainless Pvt. Ltd. manufactures buttweld pipe fittings and bends, and forged flanges, in stainless steel, duplex, carbon, alloy and nickel alloys. Fittings are seamless up to 24″ and welded up to 72″. Flanges run from ½″ to 60″ in Class 150 to 2500, depending on size.</p>
 <h2>How we work</h2><p>Forging, forming, bending, machining and testing are done at our works in Vadodara. Every piece is heat traceable and ships with an EN 10204 3.1 certificate. Welded seams are 100% radiographed.</p>
 <h2>Quality and approvals</h2><p>Our quality system is certified to ISO 9001:2015. We hold a PED 2014/68/EU material manufacturer approval and an IBR workshop approval for pipe fittings, and we are registered as a Small manufacturing enterprise on the Udyam portal. <a href="/certifications/">See each certificate and its scope</a>.</p>
 <h2>Markets</h2><p>We supply distributors, fabricators and contractors in the USA and Canada, and have supplied customers in more than 25 countries. See our <a href="/export/usa/">USA</a> and <a href="/export/canada/">Canada</a> pages for documents, ports and delivery terms.</p>
 <h2>Work with us</h2><p>Send your bill of quantities and we reply with price, lead time and terms within 24 business hours. <a href="/request-a-quote/">Request a quote</a>.</p></div>
 <aside class="side"><div class="panel"><h3>Company details</h3>{spec_table(facts)}</div></aside></div></section></main>'''
-    page("/about/", "About Neo Impex | Buttweld Fittings and Flanges Maker", "Neo Impex Stainless Pvt. Ltd. makes buttweld fittings and forged flanges in Vadodara, India, established 2005, and exports to the USA and Canada.", body, "co", [cs], kw=("Neo Impex Stainless Pvt Ltd", ["buttweld fittings manufacturer Vadodara", "flanges manufacturer Gujarat India"]))
+    about_schema = {"@context": "https://schema.org", "@type": "AboutPage", "url": SITE + "/about/", "name": "About Neo Impex", "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": ORG_ID}}
+    page("/about/", "About Neo Impex | Buttweld Fittings and Flanges Maker", "Neo Impex Stainless Pvt. Ltd. makes buttweld fittings and forged flanges in Vadodara, India, established 2005, and exports to the USA and Canada.", body, "co", [cs, about_schema], kw=("Neo Impex Stainless Pvt Ltd", ["buttweld fittings manufacturer Vadodara", "flanges manufacturer Gujarat India"]))
 
 # ----------------------------------------------------------------- SEO FILES
 def build_seo_files():
     urls = "".join(f"  <url><loc>{SITE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u, *_ in PAGES)
     with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
+    groups = [("Products", ("/buttweld-fittings/", "/flanges/")), ("Company", ("/about/", "/certifications/", "/contact/", "/request-a-quote/")), ("Export", ("/export/",)), ("Resources", ("/data-sheets/", "/blog/"))]
+    lines = ["# Neo Impex Stainless Pvt. Ltd.", "", "> Manufacturer and exporter of ASME buttweld pipe fittings (seamless to 24 inch, welded to 72 inch) and forged flanges (1/2 inch to 60 inch, Class 150 to 2500) from Vadodara, India. Established 2005. Supplies distributors, fabricators and contractors in the USA and Canada with EN 10204 3.1 certificates.", ""]
+    lines += ["Contact: kartik@neoimpexglobal.com, WhatsApp +91 93166 31458. Quote reply within 24 business hours.", ""]
+    for g, prefixes in groups:
+        lines.append("## " + g)
+        for u, t, d, *_ in PAGES:
+            if any(u == pr or (u.startswith(pr) and (pr in ("/export/",) or (pr in ("/buttweld-fittings/", "/flanges/") and u.count("/") == 3 and "/materials/" not in u))) for pr in prefixes):
+                lines.append(f"- [{t}]({SITE}{u}): {d}")
+        lines.append("")
+    lines.append("## Optional")
+    lines.append(f"- [Sitemap]({SITE}/sitemap.xml)")
+    with open(os.path.join(ROOT, "llms.txt"), "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
     with open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(f"User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /tools/\n\nSitemap: {SITE}/sitemap.xml\n")
     with open(os.path.join(ROOT, "tools", "keyword-map.csv"), "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f); w.writerow(["url", "title", "meta_description", "primary_keyword", "secondary_keywords"])
         for r in PAGES: w.writerow(r)
     with open(os.path.join(ROOT, ".htaccess"), "w", encoding="utf-8") as f:
-        f.write('''# Neo Impex static site
+        f.write(HTACCESS)
+
+HTACCESS = r'''# Neo Impex static site
 Options -Indexes
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
-# keep build tooling and version-control files private
-RedirectMatch 404 ^/(tools|\\.git)(/|$)
-<FilesMatch "\\.(py|csv|md|zip)$">
+
+# ---- canonical host and URLs ----
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# /index.html and /folder/index.html -> / and /folder/ on the canonical host (301, one hop)
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ https://neoimpexglobal.com/$1 [R=301,L,NE]
+# www -> non-www (301), keeping the path and query string
+RewriteCond %{HTTP_HOST} ^www\.neoimpexglobal\.com$ [NC]
+RewriteRule ^(.*)$ https://neoimpexglobal.com/$1 [R=301,L]
+</IfModule>
+
+# ---- keep build tooling and version-control files private ----
+RedirectMatch 404 ^/(tools|\.git)(/|$)
+<FilesMatch "\.(py|csv|md|zip|log|htaccess)$">
   Require all denied
 </FilesMatch>
+
+# ---- security headers ----
+<IfModule mod_headers.c>
+Header always set Strict-Transport-Security "max-age=31536000"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+Header always set Cross-Origin-Opener-Policy "same-origin"
+</IfModule>
+
+# ---- compression and caching ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain application/xml
+</IfModule>
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+</IfModule>
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 10 minutes"
 </IfModule>
-''')
+'''
 
 def main():
     for d in GENERATED_DIRS:
         shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
-    build_home(); build_hubs(); build_products(); build_materials(); build_datasheets(); build_export(); build_blog(); build_certifications(); build_about(); build_utility()
+    build_home(); build_hubs(); build_products(); build_materials(); build_datasheets(); build_export(); build_blog(); build_certifications(); build_about(); build_contact(); build_utility()
     build_seo_files()
     print(f"{len(PAGES)} indexable pages built")
     for w in WARN: print("WARN", w)

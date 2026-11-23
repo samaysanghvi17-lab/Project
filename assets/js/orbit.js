@@ -21,6 +21,9 @@
     b.innerHTML = '<span class="frame"><img alt="" draggable="false"></span>';
     var im = b.querySelector('img'); im.src = '/assets/img/' + p.img + '.jpg'; im.alt = p.alt; im.width = 640; im.height = 640;
     if (i > 1) im.loading = 'lazy';
+    var pic = document.createElement('picture');
+    ['avif', 'webp'].forEach(function (t) { var so = document.createElement('source'); so.type = 'image/' + t; so.srcset = '/assets/img/' + p.img + '.' + t; pic.appendChild(so); });
+    im.parentNode.insertBefore(pic, im); pic.appendChild(im);
     stage.appendChild(b); cards.push(b);
     b.addEventListener('click', function () { if (moved < 6) goTo(i); });
     var d = document.createElement('button'); d.type = 'button'; d.setAttribute('aria-label', 'Show ' + p.title);

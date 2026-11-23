@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-const TO_EMAIL   = 'kartik@neoimpex.com';
+const TO_EMAIL   = 'kartik@neoimpexglobal.com';
 const FROM_EMAIL = 'no-reply@neoimpexglobal.com';
 const FROM_NAME  = 'Neo Impex Website';
 const MAX_FILE   = 8 * 1024 * 1024;
@@ -55,7 +55,7 @@ $now = time(); $hits = [];
 if (is_readable($rlFile)) {
     $hits = array_filter(array_map('intval', explode(',', (string)@file_get_contents($rlFile))), fn($t) => $t > $now - 3600);
 }
-if (count($hits) >= MAX_PER_HOUR) { respond(429, ['ok' => false, 'error' => 'Too many requests. Please email kartik@neoimpex.com.']); }
+if (count($hits) >= MAX_PER_HOUR) { respond(429, ['ok' => false, 'error' => 'Too many requests. Please email kartik@neoimpexglobal.com.']); }
 $hits[] = $now; @file_put_contents($rlFile, implode(',', $hits));
 
 // --- collect fields ---
@@ -98,7 +98,7 @@ if (!empty($_FILES['boq']) && is_array($_FILES['boq']) && ($_FILES['boq']['error
     $f = $_FILES['boq'];
     $ext = strtolower(pathinfo((string)$f['name'], PATHINFO_EXTENSION));
     if (!in_array($ext, ALLOWED_EXT, true)) { respond(422, ['ok' => false, 'error' => 'That file type is not accepted. Please attach a PDF, Excel, Word, image or drawing file.']); }
-    if ((int)$f['size'] > MAX_FILE) { respond(422, ['ok' => false, 'error' => 'The file is larger than 8 MB. Please email it to kartik@neoimpex.com.']); }
+    if ((int)$f['size'] > MAX_FILE) { respond(422, ['ok' => false, 'error' => 'The file is larger than 8 MB. Please email it to kartik@neoimpexglobal.com.']); }
     if (is_uploaded_file((string)$f['tmp_name'])) {
         $attachment = ['name' => preg_replace('/[^A-Za-z0-9._-]+/', '_', basename((string)$f['name'])), 'data' => (string)file_get_contents((string)$f['tmp_name'])];
     }
@@ -141,5 +141,5 @@ if (getenv('NEO_MAIL_DRY_RUN') === '1') {
 }
 
 $sent = @mail(TO_EMAIL, $encSubject, $body, implode("\r\n", $headers), '-f' . FROM_EMAIL);
-if (!$sent) { respond(500, ['ok' => false, 'error' => 'Sorry, we could not send your enquiry. Please email kartik@neoimpex.com or use WhatsApp.']); }
+if (!$sent) { respond(500, ['ok' => false, 'error' => 'Sorry, we could not send your enquiry. Please email kartik@neoimpexglobal.com or use WhatsApp.']); }
 respond(200, ['ok' => true]);

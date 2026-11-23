@@ -74,7 +74,7 @@
     var bad = !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e);
     fieldErr(email, bad ? 'Please enter a valid email address.' : ''); if (bad) ok = false;
     var f = form.elements['boq'];
-    if (f && f.files && f.files[0] && f.files[0].size > MAXFILE) { setMsg(form, 'The attached file is larger than 8 MB. Please email it to kartik@neoimpex.com instead.', 'err'); ok = false; }
+    if (f && f.files && f.files[0] && f.files[0].size > MAXFILE) { setMsg(form, 'The attached file is larger than 8 MB. Please email it to kartik@neoimpexglobal.com instead.', 'err'); ok = false; }
     return ok;
   }
   function summary(form) {
@@ -86,7 +86,7 @@
   }
   function mailtoFallback(form) {
     var subj = 'Quote request – ' + (form.elements['product'] ? form.elements['product'].value : 'Neo Impex') + ' – ' + (form.elements['name'].value || '').trim();
-    window.location.href = 'mailto:kartik@neoimpex.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(summary(form) + '\n\n(Page: ' + location.href + ')');
+    window.location.href = 'mailto:kartik@neoimpexglobal.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(summary(form) + '\n\n(Page: ' + location.href + ')');
   }
 
   [].forEach.call(document.querySelectorAll('form.lead-form'), function (form) {
@@ -118,7 +118,7 @@
             form.reset(); set('page', location.href); set('started', String(Date.now()));
             setMsg(form, 'Thank you. We have your enquiry and will reply within 24 business hours.', 'ok');
           } else {
-            setMsg(form, (res.body && res.body.error) || 'Sorry, we could not send your enquiry. Please try again or email kartik@neoimpex.com.', 'err');
+            setMsg(form, (res.body && res.body.error) || 'Sorry, we could not send your enquiry. Please try again or email kartik@neoimpexglobal.com.', 'err');
           }
         })
         .catch(function () {

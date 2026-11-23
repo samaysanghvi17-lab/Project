@@ -6,7 +6,7 @@ EXPORT = {
  "usa": dict(
   name="United States", h1="Buttweld Fittings and Flanges for the USA",
   title="Buttweld Fittings & Flanges Supplier for the USA",
-  desc="Direct from the manufacturer: ASME B16.9 buttweld fittings and B16.5 flanges for US distributors and fabricators, with MTRs, MSS SP-25 marking and DAP delivery.",
+  desc="Direct from the manufacturer: ASME B16.9 buttweld fittings and B16.5 flanges for US distributors and fabricators, with MTRs, marking and DAP delivery.",
   kw=("buttweld fittings supplier USA", ["flanges manufacturer India export to USA", "ASME B16.9 fittings import from India", "stainless steel flanges USA supplier", "pipe fittings manufacturer Gujarat"]),
   lead="Neo Impex makes buttweld fittings, bends and forged flanges in Vadodara, India, and ships them to US distributors, fabricators and contractors. You buy from the manufacturer, with one set of documents for the whole order.",
   sections=[
@@ -56,7 +56,7 @@ EXPORT = {
 
 EXPORT_HUB = dict(
   title="Export of Buttweld Fittings & Flanges | USA, Canada",
-  desc="Neo Impex exports ASME buttweld fittings and flanges from India to the USA and Canada with 3.1 certificates, marking and DAP delivery. Quote in 24 business hours.",
+  desc="Neo Impex exports ASME buttweld fittings and flanges from India to the USA and Canada with 3.1 certificates, marking and DAP delivery. Quote in 24 hours.",
   h1="Export of Buttweld Fittings and Flanges")
 
 # ---------------------------------------------------------------- DATA SHEETS
@@ -92,7 +92,7 @@ DS_NOTE = ("Reference values for quotation and planning. Final dimensions and to
 DATASHEETS = {
  "buttweld-fittings": dict(
   title="Buttweld Fittings Data Sheet | ASME B16.9, MSS SP-43",
-  desc="Data sheet for Neo Impex buttweld fittings: standards, sizes, materials, wall thickness, manufacturing, testing, marking and documents. Print or save as PDF.",
+  desc="Data sheet for Neo Impex buttweld fittings: standards, sizes, materials, wall thickness, testing, marking and documents. Print or save as PDF.",
   h1="Buttweld Fittings Data Sheet",
   kw=("buttweld fittings data sheet", ["ASME B16.9 specification sheet", "butt weld fittings dimensions chart"])),
  "flanges": dict(
@@ -102,7 +102,7 @@ DATASHEETS = {
   kw=("flanges data sheet", ["ASME B16.5 specification sheet", "forged flange specification"])),
  "pipe-schedule-chart": dict(
   title="Pipe Schedule Chart | NPS, OD and Wall Thickness",
-  desc="Free pipe schedule chart: NPS, DN, outside diameter and wall thickness for Sch 40 and Sch 80, in inches and millimeters, plus 90° elbow center-to-end dimensions.",
+  desc="Free pipe schedule chart: NPS, DN, outside diameter and Sch 40 and Sch 80 wall thickness in inches and mm, plus 90° elbow center-to-end dimensions.",
   h1="Pipe Schedule Chart and Elbow Dimensions",
   kw=("pipe schedule chart", ["pipe schedule 40 80 dimensions", "NPS OD wall thickness chart", "90 degree elbow center to end dimensions"])),
 }
@@ -126,7 +126,7 @@ BLOG = [
  dict(slug="316-vs-316l-stainless-steel", date="2026-11-22",
   title="316 vs 316L Stainless Steel for Flanges and Fittings",
   h1="316 vs 316L Stainless Steel: What Is the Difference?",
-  desc="316 and 316L stainless differ mainly in carbon content. Learn what that means for welding, strength and dual certification when buying flanges and buttweld fittings.",
+  desc="316 and 316L stainless differ mainly in carbon content. What that means for welding, strength and dual certification when buying flanges and fittings.",
   kw=("316 vs 316L stainless steel", ["316L flanges", "dual certified 316/316L"]),
   intro="Grades 316 and 316L are the same alloy family, both with about 2–3% molybdenum for resistance to chlorides. The difference that matters when you buy flanges and fittings is the carbon limit.",
   body=[
@@ -168,7 +168,7 @@ BLOG = [
  dict(slug="how-to-read-flange-markings", date="2026-11-22",
   title="How to Read ASME B16.5 Flange Markings",
   h1="How to Read ASME B16.5 Flange Markings",
-  desc="What the stamps on a flange rim mean: manufacturer, ASTM material, pressure class, standard, size and heat number, and how to check them against your certificate.",
+  desc="What the stamps on a flange rim mean: manufacturer, ASTM material, class, standard, size and heat number, and how to check them on the certificate.",
   kw=("flange markings", ["ASME B16.5 flange marking", "how to read flange stamp", "flange heat number"]),
   intro="Flange rims are stamped so that every piece can be identified and traced. Learning to read the marks is the quickest way to check that what arrived matches what you ordered.",
   body=[
@@ -182,7 +182,7 @@ BLOG = [
  dict(slug="import-buttweld-fittings-flanges-india-to-usa", date="2026-11-22",
   title="Importing Buttweld Fittings and Flanges from India to the USA",
   h1="Importing Buttweld Fittings and Flanges from India to the USA",
-  desc="A checklist for US importers: documents, marking, HTS codes, importer security filing, duties and Buy America checks when buying fittings and flanges from India.",
+  desc="A checklist for US importers: documents, marking, HTS codes, security filing, duties and Buy America checks when buying fittings and flanges from India.",
   kw=("import pipe fittings from India to USA", ["importing flanges from India", "HTS code butt welding fittings", "buy flanges from India"]),
   intro="Buying fittings and flanges direct from an Indian manufacturer can cut cost and give you access to special sizes and alloys. A good import goes smoothly when you have the paperwork, marking and duty position settled before you order. This is a general checklist, not legal or customs advice.",
   body=[
@@ -209,4 +209,91 @@ BLOG = [
    ("Comparing quotes", ["Convert every quote to landed cost: price, freight, insurance, duty and delivery. A low FOB price can cost more than a DAP quote once freight and fees are added. Tell us your delivery port or ZIP code and we will quote on your terms."]),
   ],
   related=[("/export/usa/", "Supply to the USA"), ("/export/canada/", "Supply to Canada")]),
+]
+
+# ---------------------------------------------------------------- MORE BLOG POSTS
+BLOG += [
+ dict(slug="long-radius-vs-short-radius-elbows", date="2026-11-23",
+  title="Long Radius vs Short Radius Elbows: How to Choose",
+  h1="Long Radius vs Short Radius Elbows: How to Choose",
+  desc="Long radius elbows have a radius of 1.5 times the pipe size and short radius elbows 1.0. Learn when to use each and what to state on the purchase order.",
+  kw=("long radius vs short radius elbow", ["ASME B16.9 long radius elbow", "ASME B16.28 short radius elbow", "1.5D elbow"]),
+  intro="Buttweld elbows come in two standard radii. The choice changes how much room the elbow needs and how much pressure the fluid loses going round the bend.",
+  body=[
+   ("The two radii", ["A long radius (LR) elbow has a centerline radius of 1.5 times the nominal pipe size, written 1.5D. It is covered by ASME B16.9. A short radius (SR) elbow has a radius equal to the nominal pipe size, written 1D, and is covered by ASME B16.28."]),
+   ("Flow and space", ["The gentler curve of a long radius elbow gives lower pressure drop and less erosion at the bend. A short radius elbow turns in a smaller space, so it suits tight layouts, but it adds more resistance to flow."]),
+   ("Which one is the default?", ["Long radius is the default for most process and pipeline systems, and it is what a drawing means if it only says “elbow”. Use short radius only where space is limited and your design allows the extra pressure drop."]),
+   ("What to write on the order", ["State the angle (45°, 90° or 180°), long or short radius, nominal size, schedule, material grade and standard, for example: 6″ 90° LR elbow, SCH 40S, ASTM A403 WP316L, ASME B16.9."]),
+  ],
+  related=[("/buttweld-fittings/elbows/", "Buttweld elbows"), ("/buttweld-fittings/return-bends/", "180° return bends"), ("/data-sheets/pipe-schedule-chart/", "Elbow dimensions chart")]),
+
+ dict(slug="concentric-vs-eccentric-reducers", date="2026-11-23",
+  title="Concentric vs Eccentric Reducers: When to Use Each",
+  h1="Concentric vs Eccentric Reducers: When to Use Each",
+  desc="A concentric reducer keeps both ends on one centerline; an eccentric reducer keeps one side flat. See where each is used and how to specify a reducer.",
+  kw=("concentric vs eccentric reducer", ["eccentric reducer pump suction", "buttweld reducer"]),
+  intro="Both reducers change pipe size. The difference is where the center of the smaller end sits, and that decides how air, liquid and supports behave in the line.",
+  body=[
+   ("Concentric reducers", ["Both ends share the same centerline and the cone is symmetrical. Concentric reducers are common on vertical lines and in places where a symmetric change in size is fine."]),
+   ("Eccentric reducers", ["The smaller end is offset, so one side of the fitting stays straight. This keeps the pipe top or bottom level, which avoids trapping air or liquid and keeps the underside of a rack flat."]),
+   ("Common practice", ["On horizontal pump suction lines, an eccentric reducer is usually installed flat on top so air can escape and does not collect in the pump. On pipe racks, flat on bottom keeps the pipe at a constant support height. Always follow your piping design."]),
+   ("How to specify", ["Give the large end by the small end, the schedule on each end, concentric or eccentric, the material grade and the standard, for example: 10″ × 6″ eccentric reducer, SCH 40, ASTM A234 WPB, ASME B16.9."]),
+  ],
+  related=[("/buttweld-fittings/reducers/", "Buttweld reducers"), ("/buttweld-fittings/tees/", "Buttweld tees")]),
+
+ dict(slug="flange-pressure-classes-explained", date="2026-11-23",
+  title="Flange Pressure Classes: Class 150 to 2500 Explained",
+  h1="Flange Pressure Classes: Class 150, 300, 600, 900, 1500 and 2500",
+  desc="What ASME B16.5 flange classes mean, why a class number is not a pressure in psi, and how material and temperature change the allowed pressure.",
+  kw=("flange pressure class", ["Class 150 vs 300 flange", "ASME B16.5 pressure temperature rating", "Class 600 flange"]),
+  intro="A flange class such as 150 or 300 is a rating category, not a pressure in psi. The pressure a flange can hold depends on the class, the material and the temperature.",
+  body=[
+   ("The classes", ["ASME B16.5 covers Class 150, 300, 400, 600, 900, 1500 and 2500. Higher classes have thicker flanges and larger bolting, so they hold more pressure."]),
+   ("Why class is not psi", ["The allowed working pressure falls as temperature rises and differs between material groups. As an example, for carbon steel A105 at ambient temperature (up to about 38 °C or 100 °F), B16.5 gives roughly 285 psig for Class 150, 740 for Class 300, 1480 for Class 600, 2220 for Class 900, 3705 for Class 1500 and 6170 for Class 2500. At higher temperatures the values are lower."]),
+   ("How to choose", ["Take the design pressure and temperature of the line, find the material group of your flange in the ASME B16.5 pressure-temperature tables, and pick the lowest class that covers both. Your line class specification normally does this for you."]),
+   ("What to put on the order", ["State size, class, facing, flange type, material grade and standard, for example: 4″ Class 300 WNRF, SCH 80, ASTM A105, ASME B16.5. The figures above are for orientation only; always use the current standard for design."]),
+  ],
+  related=[("/flanges/weld-neck/", "Weld neck flanges"), ("/flanges/blind/", "Blind flanges"), ("/data-sheets/flanges/", "Flanges data sheet")]),
+
+ dict(slug="raised-face-vs-ring-type-joint-flanges", date="2026-11-23",
+  title="Raised Face vs Ring Type Joint Flanges",
+  h1="Raised Face vs Ring Type Joint Flanges: What Is the Difference?",
+  desc="Raised face flanges seal with a gasket; ring type joint flanges seal with a metal ring in a machined groove. See when each is used and how they must match.",
+  kw=("raised face vs ring type joint flange", ["RTJ flange", "RF flange", "RTJ ring gasket"]),
+  intro="The flange face is where the seal is made. Raised face and ring type joint flanges bolt to the same pattern in many sizes, but they seal in different ways and cannot be mixed.",
+  body=[
+   ("Raised face (RF)", ["A raised face flange has a slightly raised circle around the bore that concentrates bolt load on a flat gasket, such as spiral wound or sheet. RF is the most common facing and suits a wide range of pressures and fluids."]),
+   ("Ring type joint (RTJ)", ["An RTJ flange has a machined groove in its face that holds a metal ring gasket. When the bolts are tightened the ring deforms into the groove and seals metal to metal. RTJ is common for high pressure and temperature, often Class 600 and above in oil and gas."]),
+   ("They must match", ["An RTJ flange mates with another RTJ flange of the same size and class, and the ring must match the groove. Ring dimensions are covered by ASME B16.20. Rings are normally replaced each time the joint is opened."]),
+   ("What to specify", ["State the facing with the flange: for example 6″ Class 900 WNRTJ, ASTM A105, ASME B16.5, with the ring type and material if you need us to supply rings."]),
+  ],
+  related=[("/flanges/ring-type-joint/", "RTJ flanges"), ("/flanges/weld-neck/", "Weld neck flanges")]),
+
+ dict(slug="how-to-read-an-en-10204-3-1-certificate", date="2026-11-23",
+  title="How to Read an EN 10204 3.1 Mill Test Certificate",
+  h1="How to Read an EN 10204 3.1 Mill Test Certificate",
+  desc="What an EN 10204 3.1 certificate contains, how to match its heat number to your fittings and flanges, and how it differs from type 3.2.",
+  kw=("EN 10204 3.1 certificate", ["mill test certificate", "MTC for flanges and fittings", "EN 10204 3.2"]),
+  intro="An EN 10204 type 3.1 certificate is the manufacturer’s statement that the material meets its order and standard, backed by test results. Reading it takes a few minutes and avoids most material mix-ups.",
+  body=[
+   ("What it contains", ["The certificate lists the manufacturer, the heat or cast number, the product and size, the material standard and grade, the chemical composition, and the mechanical test results such as yield strength, tensile strength and elongation. It may also show hardness, impact tests and the heat treatment."]),
+   ("Who signs it", ["A type 3.1 certificate is validated by the manufacturer’s authorized inspection representative, who is independent of the production department. A type 3.2 certificate is also validated by an independent party, such as the purchaser’s inspector or a third-party inspection body."]),
+   ("How to check it", ["Find the heat number stamped on your flange or fitting and look for the same number on the certificate. Then compare the grade and standard with your order, and check that the chemistry and test values sit within the limits for that grade."]),
+   ("If something does not match", ["If the heat number, grade or values do not match, do not install the part. Contact the supplier and keep the piece for inspection. Neo Impex ships heat-traceable parts with a 3.1 certificate, and can arrange third-party inspection if you need a 3.2."]),
+  ],
+  related=[("/blog/how-to-read-flange-markings/", "How to read flange markings"), ("/data-sheets/buttweld-fittings/", "Buttweld fittings data sheet")]),
+
+ dict(slug="buttweld-end-preparation-asme-b16-25", date="2026-11-23",
+  title="Buttweld End Preparation: ASME B16.25 Bevels Explained",
+  h1="Buttweld End Preparation: ASME B16.25 Bevels Explained",
+  desc="ASME B16.25 defines the bevels on buttweld fittings and flanges. Learn the standard bevel angle, root face and why the end must match the pipe.",
+  kw=("ASME B16.25 bevel", ["buttweld end preparation", "37.5 degree bevel", "weld bevel for fittings"]),
+  intro="Buttweld fittings and weld neck flanges are welded to the pipe at a beveled end. ASME B16.25 sets the shape of that bevel so that welders and fittings from different makers fit together.",
+  body=[
+   ("The standard bevel", ["For the usual wall thicknesses, the standard bevel is 37.5° (with a tolerance of ±2.5°), leaving a small flat land at the root called the root face, about 1.6 mm (1/16 in). For heavier walls, a compound bevel is used."]),
+   ("Why the ends must match", ["The bore and wall at the fitting end should match the pipe. A step between the two disturbs flow and makes a poor weld. Tell us the pipe schedule or wall thickness so the fitting or flange bore is made to suit."]),
+   ("Special preparations", ["Some jobs need a different bevel, a counterbore, or a plain end, for example for automatic welding. State this on the drawing or order so it is made at the works instead of on site."]),
+   ("What to write on the order", ["State the standard (ASME B16.25), the wall thickness or schedule at each end, and any special bevel. If you give no instruction, the standard bevel is supplied."]),
+  ],
+  related=[("/buttweld-fittings/", "Buttweld fittings"), ("/flanges/weld-neck/", "Weld neck flanges"), ("/data-sheets/pipe-schedule-chart/", "Pipe schedule chart")]),
 ]

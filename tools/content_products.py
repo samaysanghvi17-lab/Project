@@ -54,7 +54,7 @@ FITTINGS = {
   name="Buttweld Tees", short="Equal and reducing tees for branch lines",
   h1="Buttweld Tees: Equal and Reducing",
   title="Buttweld Tees Manufacturer & Exporter | USA, Canada",
-  desc="ASME B16.9 equal and reducing buttweld tees in stainless, duplex, carbon, alloy and nickel alloys. Seamless to 24″, welded to 72″. Export to USA and Canada.",
+  desc="ASME B16.9 equal and reducing buttweld tees in stainless, duplex, carbon, alloy and nickel. Seamless to 24″, welded to 72″. Export to USA and Canada.",
   kw=("buttweld tee manufacturer", ["ASME B16.9 tee supplier", "reducing tee butt weld", "stainless steel butt weld tee", "equal tee pipe fitting"]),
   chips=["ASME B16.9", "Equal and reducing", "Welded to 72″"],
   intro=[
@@ -73,7 +73,7 @@ FITTINGS = {
   name="Buttweld Reducers", short="Concentric and eccentric reducers",
   h1="Buttweld Reducers: Concentric and Eccentric",
   title="Buttweld Reducers Manufacturer & Exporter | USA, Canada",
-  desc="Concentric and eccentric ASME B16.9 buttweld reducers in stainless, duplex, carbon, alloy and nickel. Seamless to 24″, welded to 72″. Export to USA, Canada.",
+  desc="Concentric and eccentric ASME B16.9 buttweld reducers in stainless, duplex, carbon, alloy, nickel. Seamless to 24″, welded to 72″. Export to USA, Canada.",
   kw=("buttweld reducer manufacturer", ["concentric reducer ASME B16.9", "eccentric reducer supplier", "stainless steel butt weld reducer", "pipe reducer exporter India"]),
   chips=["ASME B16.9", "Concentric", "Eccentric"],
   intro=[
@@ -127,7 +127,7 @@ FITTINGS = {
   name="Buttweld Crosses", short="Four-way branch connections",
   h1="Buttweld Crosses",
   title="Buttweld Crosses Manufacturer & Exporter | USA, Canada",
-  desc="ASME B16.9 straight and reducing buttweld crosses in stainless, duplex, carbon, alloy and nickel alloys. Seamless to 24″, welded to 72″. Export to USA and Canada.",
+  desc="ASME B16.9 straight and reducing buttweld crosses in stainless, duplex, carbon, alloy, nickel. Seamless to 24″, welded to 72″. Export to USA and Canada.",
   kw=("buttweld cross manufacturer", ["ASME B16.9 cross", "stainless steel butt weld cross", "four way pipe fitting"]),
   chips=["ASME B16.9", "Straight and reducing"],
   intro=[
@@ -161,7 +161,7 @@ FITTINGS = {
  "pipe-bends": dict(
   name="Pipe Bends: 3D, 5D, 10D and Piggable", short="3D / 5D / 10D, induction and piggable bends",
   h1="Pipe Bends: 3D, 5D, 10D, Induction and Piggable",
-  title="Pipe Bends 3D 5D 10D & Piggable Bends | Exporter",
+  title="Pipe Bends 3D 5D 10D & Piggable Bends | USA, Canada",
   desc="3D, 5D and 10D pipe bends, induction bends and piggable bends to R = 22D, up to 24″. Made in our own bending shop. Export to USA and Canada.",
   kw=("pipe bend manufacturer", ["induction bend supplier", "piggable bend 5D 10D", "3D 5D pipe bend", "ASME B16.49 induction bend"]),
   chips=["3D · 5D · 10D", "Up to 24″", "Piggable to R = 22D"],
@@ -188,7 +188,7 @@ FLANGES = {
   name="Weld Neck Flanges", short="WNRF and RTJ for high-pressure and critical service",
   h1="Weld Neck Flanges (WNRF, RTJ)",
   title="Weld Neck Flanges Manufacturer & Exporter | USA, Canada",
-  desc="ASME B16.5 and B16.47 weld neck flanges, raised face and RTJ, ½″ to 60″, Class 150 to 2500. Stainless, duplex, carbon, alloy, nickel. Export to USA and Canada.",
+  desc="ASME B16.5 and B16.47 weld neck flanges, raised face and RTJ, ½″ to 60″, Class 150 to 2500. Stainless, duplex, carbon, alloy, nickel. Export to USA/Canada.",
   kw=("weld neck flange manufacturer", ["ASME B16.5 weld neck flange", "WNRF flange supplier", "A105 weld neck flange", "stainless steel weld neck flange USA"]),
   chips=["ASME B16.5 · B16.47", "½″ to 60″", "Class 150–2500"],
   intro=[
@@ -242,7 +242,7 @@ FLANGES = {
   name="Socket Weld Flanges", short="Small-bore, high-pressure lines",
   h1="Socket Weld Flanges (SWRF)",
   title="Socket Weld Flanges Manufacturer & Exporter | USA, Canada",
-  desc="ASME B16.5 socket weld raised face flanges for small-bore, high-pressure lines in stainless, duplex, carbon, alloy and nickel alloys. Export to USA and Canada.",
+  desc="ASME B16.5 socket weld raised face flanges for small-bore, high-pressure lines in stainless, duplex, carbon, alloy and nickel. Export to USA and Canada.",
   kw=("socket weld flange manufacturer", ["SWRF flange supplier", "ASME B16.5 socket weld flange", "stainless steel socket weld flange"]),
   chips=["ASME B16.5", "SWRF", "Small bore"],
   intro=[
@@ -259,7 +259,7 @@ FLANGES = {
   name="Threaded Flanges", short="NPT screwed flanges where welding isn’t allowed",
   h1="Threaded Flanges (NPT)",
   title="Threaded Flanges Manufacturer & Exporter | USA, Canada",
-  desc="ASME B16.5 threaded (NPT screwed) flanges in stainless, duplex, carbon, alloy and nickel alloys. Forged in India. Export to USA and Canada with test certificates.",
+  desc="ASME B16.5 threaded (NPT screwed) flanges in stainless, duplex, carbon, alloy and nickel alloys. Forged in India, exported to the USA and Canada.",
   kw=("threaded flange manufacturer", ["NPT threaded flange supplier", "ASME B16.5 threaded flange", "stainless steel threaded flange", "screwed flange"]),
   chips=["ASME B16.5", "NPT", "No welding"],
   intro=[
@@ -308,7 +308,7 @@ FLANGES = {
  "long-weld-neck": dict(
   name="Long Weld Neck Flanges", short="Extended hubs for vessels and column nozzles",
   h1="Long Weld Neck (LWN) Flanges",
-  title="Long Weld Neck Flanges Manufacturer & Exporter | USA",
+  title="Long Weld Neck Flanges Manufacturer | USA, Canada",
   desc="Long weld neck (LWN) flanges with extended hubs for pressure vessel and column nozzles, made to your drawing. Export to USA and Canada.",
   kw=("long weld neck flange manufacturer", ["LWN flange supplier", "extended weld neck flange", "vessel nozzle flange"]),
   chips=["Made to drawing", "Extended hub"],
