@@ -603,3 +603,7 @@ body.theme-red{--accent:#d3131f;--accent-2:#ff5a64;--accent-rgb:211,19,31;--acce
 .phero.single h1{font-size:clamp(34px,5vw,72px)}
 @media (max-width:1000px){.phero .wrap{grid-template-columns:1fr}}
 @media (max-width:620px){.phero h1{font-size:clamp(30px,9vw,44px)}}
+
+/* carousel: height is set by script from the card size */
+.orbit-stage{height:auto;min-height:220px}
+.orbit-glow{bottom:10%}

@@ -33,14 +33,20 @@
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
   function norm(a) { a = a % 360; return a < 0 ? a + 360 : a; }
   function layout() {
-    var W = stage.clientWidth, cs = clamp(W * .26, 150, 300), Rx = Math.min(W * .40, 560), Ry = cs * .1, best = -1, bestC = -2;
+    var W = stage.clientWidth, small = W < 700;
+    var cs = small ? clamp(W * .66, 210, 330) : clamp(W * .28, 220, 380);
+    var Rx = small ? W * .64 : Math.min(W * .40, 600), Ry = cs * .06, best = -1, bestC = -2;
     stage.style.setProperty('--cs', cs + 'px');
+    stage.style.height = Math.round(cs * .667 + (small ? 40 : 80)) + 'px';
     for (var i = 0; i < n; i++) {
       var a = (i * step - rot) * Math.PI / 180, s = Math.sin(a), c = Math.cos(a), depth = (c + 1) / 2;
-      var sc = .52 + .48 * depth, x = s * Rx, y = c * Ry - cs * .02, el = cards[i];
+      var sc = .6 + .4 * depth, x = s * Rx, y = c * Ry, el = cards[i];
       el.style.transform = 'translate(-50%,-50%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + sc.toFixed(3) + ')';
       el.style.zIndex = Math.round(depth * 100);
-      el.style.filter = 'brightness(' + (.34 + .66 * Math.pow(depth, 1.25)).toFixed(2) + ')';
+      /* only the front card and its two neighbours are shown, so nothing piles up behind */
+      el.style.opacity = clamp((c + .2) / .6, 0, 1).toFixed(2);
+      el.style.pointerEvents = c > .4 ? 'auto' : 'none';
+      el.style.filter = 'brightness(' + (.5 + .5 * Math.pow(depth, 1.2)).toFixed(2) + ')';
       el.tabIndex = c > .85 ? 0 : -1;
       if (c > bestC) { bestC = c; best = i; }
     }

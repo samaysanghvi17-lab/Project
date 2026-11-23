@@ -283,7 +283,7 @@ def build_home():
 <section class="orbit-sec" aria-label="Product range"><div class="wrap"><div class="sec-head"><p class="eyebrow">Product range</p><h2>What we make</h2></div></div>
   <div class="orbit" role="region" aria-roledescription="carousel" aria-label="Neo Impex product range">
     <div class="orbit-stage" id="stage"><div class="orbit-ring" aria-hidden="true"><svg viewBox="0 0 1000 230" preserveAspectRatio="none"><ellipse cx="500" cy="115" rx="498" ry="113" fill="none" stroke="#f1dec0" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 9" vector-effect="non-scaling-stroke"/></svg></div>
-      <div class="orbit-glow" aria-hidden="true"></div><img class="orbit-mark" src="/assets/img/mark-white.png" alt="" aria-hidden="true" width="220" height="168"></div>
+      <div class="orbit-glow" aria-hidden="true"></div></div>
     <div class="orbit-caption" id="caption" aria-live="off"><span class="tag" id="capTag">Flanges</span><h2 id="capTitle">Weld neck flanges</h2><p id="capText">WNRF and RTJ for high-pressure and critical service.</p>
       <a class="more" id="capLink" href="/flanges/weld-neck/">View product →</a><a class="more" id="capQuote" href="/request-a-quote/">Request a quote →</a></div>
     <div class="orbit-controls"><button class="arrow" id="prev" aria-label="Previous product">←</button><div class="dots" id="dots"></div><button class="arrow" id="next" aria-label="Next product">→</button></div>
