@@ -114,6 +114,12 @@ def header(active):
     <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span></button>
 </div></header>'''
 
+import hashlib
+def ver(path):
+    """Short content hash so browsers and the CDN fetch a new file whenever it changes."""
+    with open(os.path.join(ROOT, path.lstrip("/")), "rb") as fh:
+        return hashlib.sha1(fh.read()).hexdigest()[:8]
+
 def footer():
     return f'''<footer><div class="wrap">
   <div class="foot">
@@ -131,7 +137,7 @@ def footer():
 <a class="wa-float" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat with Neo Impex on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a>
 <div class="mbar"><a class="mq" href="/request-a-quote/">Request a quote</a><a class="mw" href="https://wa.me/{PHONE_WA}?text=Hello%20Neo%20Impex%2C%20I%20would%20like%20to%20send%20a%20BOQ." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1.1-.9.9c-1-.4-2-1.4-2.4-2.4l.9-.9L11 7.8z"/></svg><span>WhatsApp</span></a></div>
 </aside>
-<script src="/assets/js/config.js"></script><script src="/assets/js/site.js" defer></script>'''
+<script src="/assets/js/config.js?v={ver("/assets/js/config.js")}"></script><script src="/assets/js/site.js?v={ver("/assets/js/site.js")}" defer></script>'''
 
 ORG_ID = SITE + "/#organization"
 # The single number shown on every page; the schema below lists exactly the same one.
@@ -168,7 +174,7 @@ def head(title, desc, url, schemas=(), image=OG, noindex=False, extra_css=""):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v={ver("/assets/css/site.css")}">
 {jd(ORG)}{"".join(jd(s) for s in schemas)}
 <noscript><style>.reveal{{opacity:1;transform:none}}</style></noscript>
 </head>'''
@@ -321,7 +327,7 @@ def build_home():
   </div>
   <div class="reveal">{quote_form("home", "Buttweld fittings and flanges")}</div></div></section>
 </main>
-<script src="/assets/js/orbit.js" defer></script>'''
+<script src="/assets/js/orbit.js?v={ver("/assets/js/orbit.js")}" defer></script>'''
     page("/", title, desc, body, schemas=[WEBSITE], kw=("buttweld fittings and flanges manufacturer", ["ASME B16.9 fittings exporter India", "flanges manufacturer India USA Canada"]))
     # the home page uses the /404-safe script order: orbit.js after site.js
 
@@ -728,13 +734,13 @@ Header always set Cross-Origin-Opener-Policy "same-origin"
 </IfModule>
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/avif "access plus 1 month"
   ExpiresByType image/x-icon "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
   ExpiresByType text/html "access plus 10 minutes"
 </IfModule>
 '''
